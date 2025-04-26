@@ -1,0 +1,46 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="WriterSharp.MainWindow"
+		Icon="avares://WriterSharp/Assets/TransparentIcon.ico"
+        Title="WriterSharp">
+	<Grid RowDefinitions="Auto, *, Auto" Name="MainGrid">
+		<Grid Grid.Row="0">
+			<Menu>
+				<MenuItem Header="_File">
+					<MenuItem Header="New text file"></MenuItem>
+					<MenuItem Header="New from template"></MenuItem>
+					<Separator></Separator>
+					<MenuItem Header="Open" Click="OnClickOpen"></MenuItem>
+					<MenuItem Header="Open recent file"></MenuItem>
+					<Separator></Separator>
+					<MenuItem Header="Save"></MenuItem>
+					<MenuItem Header="Save as"></MenuItem>
+					<Separator></Separator>
+					<MenuItem Header="Exit"></MenuItem>
+					<Separator></Separator>
+					<MenuItem Header="Exit without saving"></MenuItem>
+				</MenuItem>
+				<MenuItem Header="_About">
+					<MenuItem Header="What is WriterSharp?"></MenuItem>
+					<MenuItem Header="License"></MenuItem>
+					<Separator></Separator>
+					<MenuItem Header="Repository" Click="OnClickRepository"></MenuItem>
+					<MenuItem Header="Website" Click="OnClickWebsite"></MenuItem>
+					<Separator></Separator>
+					<MenuItem Header="Nostalgia Hit"></MenuItem>
+				</MenuItem>
+			</Menu>
+		</Grid>
+		<Grid Grid.Row="1">
+			<TextBox AcceptsReturn="True"
+					 AcceptsTab="True"
+					 TextWrapping="Wrap"
+					 Name="MainTextBox">
+			</TextBox>
+		</Grid>
+	</Grid>
+</Window>
+

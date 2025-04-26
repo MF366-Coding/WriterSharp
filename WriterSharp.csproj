@@ -1,21 +1,110 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
+	<!-- Generic properties -->
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<InformationalVersion>1.0.0</InformationalVersion>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
+		<PublishSingleFile>true</PublishSingleFile>
+		<PublishTrimmed>false</PublishTrimmed>
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
+		<Optimize>true</Optimize>
 
-  <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.2.7" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.2.7" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.7" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.7" />
-    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Include="Avalonia.Diagnostics" Version="11.2.7">
-      <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
-      <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
-    </PackageReference>
-  </ItemGroup>
+		<Description>The text editor... now in C#. WriterSharp is a simple text editor, yet one you can't miss out on!</Description>
+		<FileVersion>1.0.0.0</FileVersion>
+		<InformationalVersion>1.0.0</InformationalVersion>
+
+		<!-- UNCOMMENT FOR UNSTABLE RELEASES -->
+		<!-- SourceRevisisonId = <alpha/beta>@<DD><MM><YY><reviewer (6 letters)> -->
+		<SourceRevisionId>ALPHA@260425mfmatt</SourceRevisionId>
+
+		<!-- UNCOMMENT FOR STABLE RELEASES -->
+		<!-- <SourceRevisionId>stable</SourceRevisionId> -->
+
+		<!-- UNCOMMENT FOR STABLE RELEASES THAT HAVE BEEN PATCHED IN THE SAME VERSION -->
+		<!-- <SourceRevisionId>patch1</SourceRevisionId> -->
+
+		<!-- End of SourceRevisionId -->
+		
+		<!-- this setting gets overwrited if in debug mode -->
+		<RuntimeIdentifiers>win-x64;linux-x64;osx-x64;win-x86</RuntimeIdentifiers>
+		<Platforms>AnyCPU;x64;x86</Platforms>
+	</PropertyGroup>
+
+	<!-- OS and Platform constants -->
+	<PropertyGroup>
+		<!-- Windows (64 bit) -->
+		<DefineConstants Condition="'$(RuntimeIdentifier)' == 'win-x64'">
+			WINDOWS;X86_64
+		</DefineConstants>
+		<ApplicationIcon Condition="'$(RuntimeIdentifier)' == 'win-x64'">
+			Assets\AppIcon.ico
+		</ApplicationIcon>
+
+		<!-- Windows (32 bit) -->
+		<!-- It ain't like this one will be supported for much longer but whatever... -->
+		<DefineConstants Condition="'$(RuntimeIdentifier)' == 'win-x86'">
+			WINDOWS;X86
+		</DefineConstants>
+		<ApplicationIcon Condition="'$(RuntimeIdentifier)' == 'win-x86'">
+			Assets\AppIcon.ico
+		</ApplicationIcon>
+
+		<!-- Linux -->
+		<DefineConstants Condition="'$(RuntimeIdentifier)' == 'linux-x64'">
+			LINUX;X86_64
+		</DefineConstants>
+
+		<!-- MacOS (64 bit) -->
+		<DefineConstants Condition="'$(RuntimeIdentifier)' == 'osx-x64'">
+			DARWIN;X86_64
+		</DefineConstants>
+	</PropertyGroup>
+
+	<!-- Release Mode -->
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<DefineConstants>$(DefineConstants);RELEASE</DefineConstants>
+		<DebugType>none</DebugType>
+		<DebugSymbols>false</DebugSymbols>
+	</PropertyGroup>
+
+	<!-- Debug Mode -->
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+		<DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
+		<DebugType>full</DebugType>
+		<DebugSymbols>true</DebugSymbols>
+		<Optimize>false</Optimize>
+	</PropertyGroup>
+
+	<!-- Verbose Information -->
+	<Target Name="BuildInfo" BeforeTargets="Build">
+		<Message Text="Building with $(TargetFramework) for $(RuntimeIdentifier) in $(Configuration) mode" Importance="High" />
+		<Message Condition="'$(Configuration)' == 'Release'" Text="Optimization enabled: $(Optimize)" Importance="High" />
+		<Message Condition="'$(Configuration)' == 'Debug'" Text="THIS IS AN UNOPTIMIZED DEBUG BUILD, please use Release mode for actual releases." Importance="High" />
+	</Target>
+
+	<!-- Avalonia Stuff -->
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="11.2.7" />
+		<PackageReference Include="Avalonia.Desktop" Version="11.2.7" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.7" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.7" />
+		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+		<PackageReference Include="Avalonia.Diagnostics" Version="11.2.7">
+			<IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+			<PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="MessageBox.Avalonia" Version="3.2.0" />
+	</ItemGroup>
+
+	<!-- My stuff -->
+	<ItemGroup>
+		<AvaloniaResource Include="Assets\**" />
+
+		<!-- Asset Folder -->
+		<None Include="Assets\**" Pack="true" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
 </Project>
