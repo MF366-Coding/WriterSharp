@@ -2,6 +2,10 @@
 bin
 obj
 
+# Config files
+.vs/*
+.vscode/* # I'm using Visual Studio but if I need VSCode...
+
 # Solution
 *.sln
 

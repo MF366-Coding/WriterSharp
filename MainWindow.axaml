@@ -7,9 +7,9 @@
 		Icon="avares://WriterSharp/Assets/TransparentIcon.ico"
         Title="WriterSharp">
 	<Grid RowDefinitions="Auto, *, Auto" Name="MainGrid">
-		<Grid Grid.Row="0">
+		<Grid Grid.Row="0" Margin="6">
 			<Menu>
-				<MenuItem Header="_File">
+				<MenuItem Header="_File" CornerRadius="10" Padding="5">
 					<MenuItem Header="New text file"></MenuItem>
 					<MenuItem Header="New from template"></MenuItem>
 					<Separator></Separator>
@@ -19,11 +19,11 @@
 					<MenuItem Header="Save"></MenuItem>
 					<MenuItem Header="Save as"></MenuItem>
 					<Separator></Separator>
-					<MenuItem Header="Exit"></MenuItem>
+					<MenuItem Header="Exit" Click="OnClickExit"></MenuItem>
 					<Separator></Separator>
-					<MenuItem Header="Exit without saving"></MenuItem>
+					<MenuItem Header="Exit without saving" Click="OnClickExitWithoutSaving"></MenuItem>
 				</MenuItem>
-				<MenuItem Header="_About">
+				<MenuItem Header="_About" CornerRadius="10" Padding="5">
 					<MenuItem Header="What is WriterSharp?"></MenuItem>
 					<MenuItem Header="License"></MenuItem>
 					<Separator></Separator>
@@ -38,8 +38,24 @@
 			<TextBox AcceptsReturn="True"
 					 AcceptsTab="True"
 					 TextWrapping="Wrap"
-					 Name="MainTextBox">
+					 Name="MainTextBox"
+					 Margin="5"
+					 TextChanged="OnContentModification">
 			</TextBox>
+		</Grid>
+		<Grid Grid.Row="2" ColumnDefinitions="*, Auto, Auto, Auto" Margin="2">
+			<Grid Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center">
+				<TextBlock>Language (Managed by: Plugin)</TextBlock>
+			</Grid>
+			<Grid Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+				<TextBlock Padding="5">*</TextBlock>
+			</Grid>
+			<Grid Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+				<TextBlock Padding="5">Line Ending</TextBlock>
+			</Grid>
+			<Grid Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center">
+				<TextBlock Padding="5">Encoding</TextBlock>
+			</Grid>
 		</Grid>
 	</Grid>
 </Window>
