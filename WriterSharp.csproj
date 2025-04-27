@@ -32,10 +32,15 @@
 		<!-- this setting gets overwrited if in debug mode -->
 		<RuntimeIdentifiers>win-x64;linux-x64;osx-x64;win-x86</RuntimeIdentifiers>
 		<Platforms>AnyCPU;x64;x86</Platforms>
+		
+		<DefineConstants>WINDOWS;LINUX;DARWIN;X86_64;X86</DefineConstants>
+		<!-- these constants will be overwritten afterwards -->
 	</PropertyGroup>
 
 	<!-- OS and Platform constants -->
 	<PropertyGroup>
+		<DefineConstants>UNIVERSAL</DefineConstants>
+		
 		<!-- Windows (64 bit) -->
 		<DefineConstants Condition="'$(RuntimeIdentifier)' == 'win-x64'">
 			WINDOWS;X86_64
@@ -89,6 +94,7 @@
 	<!-- Avalonia Stuff -->
 	<ItemGroup>
 		<PackageReference Include="Avalonia" Version="11.2.7" />
+		<PackageReference Include="Avalonia.AvaloniaEdit" Version="11.2.0" />
 		<PackageReference Include="Avalonia.Desktop" Version="11.2.7" />
 		<PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.7" />
 		<PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.7" />
@@ -97,7 +103,10 @@
 			<IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
 			<PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
 		</PackageReference>
+		<PackageReference Include="AvaloniaEdit.TextMate" Version="11.2.0" />
 		<PackageReference Include="MessageBox.Avalonia" Version="3.2.0" />
+		<PackageReference Include="TextMateSharp" Version="1.0.66" />
+		<PackageReference Include="TextMateSharp.Grammars" Version="1.0.66" />
 	</ItemGroup>
 
 	<!-- My stuff -->
