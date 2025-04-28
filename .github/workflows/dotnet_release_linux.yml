@@ -59,9 +59,10 @@ jobs:
       - name: Append Release Warning
         run: |
              echo "> [!CAUTION]" >> LatestReleaseNotes.md
-             echo "Output Part 1"
              echo "> The following binaries were not compiled manually. **Use them at your own risk!**" >> LatestReleaseNotes.md
-             echo "Output Part 2"
+             echo "" >> LatestReleaseNotes.md
+             echo "> [!TIP]" >> LatestReleaseNotes.md
+             echo "> If you have the .NET runtime installed, I highly recommend compiling my code yourself, because the binaries below are `self-contained` and take up a lot more space than they should." >> LatestReleaseNotes.md
 
       # Step 11
       - name: Create Release

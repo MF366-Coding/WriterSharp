@@ -14,7 +14,7 @@
 
 		<Description>The text editor... now in C#. WriterSharp is a simple text editor, yet one you can't miss out on!</Description>
 		<FileVersion>1.0.1.0</FileVersion>
-		<InformationalVersion>1.0.0-alpha1</InformationalVersion>
+		<InformationalVersion>1.0.0-alpha4</InformationalVersion>
 
 		<!-- UNCOMMENT FOR UNSTABLE RELEASES -->
 		<!-- SourceRevisisonId = @<DD><MM><YY><reviewer (6 letters)> -->

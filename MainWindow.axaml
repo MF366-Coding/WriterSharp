@@ -25,7 +25,7 @@
 					<MenuItem Header="Exit without saving" Click="OnClickExitWithoutSaving"></MenuItem>
 				</MenuItem>
 				<MenuItem Header="_About" CornerRadius="10" Padding="5">
-					<MenuItem Header="What is WriterSharp?"></MenuItem>
+					<MenuItem Header="What is WriterSharp?" Click="OnClickAbout"></MenuItem>
 					<MenuItem Header="License"></MenuItem>
 					<Separator></Separator>
 					<MenuItem Header="Repository" Click="OnClickRepository"></MenuItem>

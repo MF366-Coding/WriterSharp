@@ -762,6 +762,8 @@ namespace WriterSharp
 		/// <param name="e"></param>
 		private async void OnClickWebsite(object? sender, RoutedEventArgs? e) => await BrowserService.OpenURLAsync(WEBSITE_URL);
 
+		private void OnClickAbout(object? sender, RoutedEventArgs? e) => new AboutDialog().Show();
+
 		#endregion
 
 	}
