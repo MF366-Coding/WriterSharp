@@ -45,18 +45,13 @@ jobs:
       - name: Create ZIP archives
         run: |
           cd ./publish
-          powershell Compress-Archive -Path (Get-ChildItem -Path . -Recurse | Select-Object -ExpandProperty FullName) -DestinationPath "../WriterSharp_${{ env.VERSION }}_win64.zip"
+          powershell Compress-Archive -Path * -DestinationPath "../WriterSharp_${{ env.VERSION }}_win64.zip"
 
       # Step 9
       - name: Create TAR.GZ archives
         run: |
           cd ./publish
           tar -czvf "../WriterSharp_${{ env.VERSION }}_win64.tar.gz" *
-
-      - name: Append Release Warning
-        run:
-             echo "> [!WARNING]" >> LatestReleaseNotes.md
-             echo "> The following binaries were not compiled manually. Use them at your own risk." >> LatestReleaseNotes.md"
 
       # Step 10
       - name: Create Release

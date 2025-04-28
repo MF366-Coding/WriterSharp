@@ -55,12 +55,13 @@ jobs:
           tar -czvf "../WriterSharp_${{ env.VERSION }}_linux64.tar.gz" *
         shell: bash
 
+      # Step 10
       - name: Append Release Warning
         run:
-             echo "> [!WARNING]" >> LatestReleaseNotes.md
-             echo "> The following binaries were not compiled manually. Use them at your own risk." >> LatestReleaseNotes.md
+             echo "> [!WARNING]\n> The following binaries were not compiled manually. Use them at your own risk." >> LatestReleaseNotes.md
+             #echo "> The following binaries were not compiled manually. Use them at your own risk." >> LatestReleaseNotes.md
 
-      # Step 10
+      # Step 11
       - name: Create Release
         uses: softprops/action-gh-release@v1
 
