@@ -49,20 +49,10 @@ jobs:
           tar -czvf "../WriterSharp_win64.tar.gz" *
 
       # Step 9
-      - name: Append Release Warning
-        run: |
-             echo "> [!CAUTION]" >> LatestReleaseNotes.md
-             echo "Output Part 1"
-             echo "> The following binaries were not compiled manually. **Use them at your own risk.**" >> LatestReleaseNotes.md
-             echo "Output Part 2"
-
-      # Step 10
       - name: Create Release
         uses: softprops/action-gh-release@v1
 
         with:
-          body_path: LatestReleaseNotes.md
-          generate_release_notes: true
           files: |
               ./*.zip
               ./*.tar.gz
