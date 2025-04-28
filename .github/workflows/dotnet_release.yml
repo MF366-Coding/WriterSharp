@@ -48,10 +48,10 @@ jobs:
       # Step 8
       - name: Create ZIP archives
         run: |
-          if [ $RUNNER_OS == 'Windows' ]; then
+          if [[ $RUNNER_OS == 'Windows' ]]; then
             cd ./publish
             powershell Compress-Archive -Path * -DestinationPath "../WriterSharp_${{ env.VERSION }}_win64.zip"
-          elif [ $RUNNER_OS == 'Linux' ]; then
+          elif [[ $RUNNER_OS == 'Linux' ]]; then
             cd ./publish
             zip -r "../WriterSharp_${{ env.VERSION }}_linux64.zip" *
           # MacOS down here
@@ -63,10 +63,10 @@ jobs:
       # Step 9
       - name: Create TAR.GZ archives
         run: |
-          if [ $RUNNER_OS == 'Windows' ]; then
+          if [[ $RUNNER_OS == 'Windows' ]]; then
             cd ./publish
             tar -czvf "../WriterSharp_${{ env.VERSION }}_win64.tar.gz" *
-          elif [ $RUNNER_OS == 'Linux' ]; then
+          elif [[ $RUNNER_OS == 'Linux' ]]; then
             cd ./publish
             tar -czvf "../WriterSharp_${{ env.VERSION }}_linux64.tar.gz" *
           # MacOS down here
