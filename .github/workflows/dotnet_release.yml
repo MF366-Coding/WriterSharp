@@ -16,7 +16,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '8.0'  # Specify your .NET version here
+          dotnet-version: '8.0'
 
       - name: Restore dependencies
         run: dotnet restore
@@ -28,7 +28,7 @@ jobs:
         run: dotnet test
 
       - name: Publish the project
-        run: dotnet publish --configuration Release --output ./publish
+        run: dotnet publish --configuration Release --runtime win-x64 --framework net8.0 -p:Optimize=true --output ./publish
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
