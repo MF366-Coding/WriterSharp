@@ -1,0 +1,75 @@
+name: .NET Release Workflow for Linux (x64)
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step 2
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '8.0'
+
+      # Step 3
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # Step 4
+      - name: Build the project
+        run: dotnet build --configuration Release --runtime win-x64 --framework net8.0 -p:Optimize=true
+
+      # Step 5
+      - name: Run tests
+        run: dotnet test
+
+      # Step 6
+      - name: Publish the project
+        run: dotnet publish --configuration Release --runtime win-x64 --framework net8.0 -p:Optimize=true --output ./publish
+       
+      # Step 7
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=$(echo ${GITHUB_REF} | sed 's/refs\/tags\///')" >> $GITHUB_ENV
+
+      # Step 8
+      - name: Create ZIP archives
+        run: |
+          cd ./publish
+          zip -r "../WriterSharp_${{ env.VERSION }}_linux64.zip" *
+        shell: bash
+
+      # Step 9
+      - name: Create TAR.GZ archives
+        run: |
+          cd ./publish
+          tar -czvf "../WriterSharp_${{ env.VERSION }}_linux64.tar.gz" *
+        shell: bash
+
+      - name: Append Release Warning
+        run:
+             echo "> [!WARNING]" >> LatestReleaseNotes.md
+             echo "> The following binaries were not compiled manually. Use them at your own risk." >> LatestReleaseNotes.md"
+
+      # Step 10
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+
+        with:
+          body_path: LatestReleaseNotes.md
+          generate_release_notes: true
+          files: |
+              ./*.zip
+              ./*.tar.gz
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

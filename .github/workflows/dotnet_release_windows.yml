@@ -1,4 +1,4 @@
-name: .NET Release Workflow
+name: .NET Release Workflow for Windows (x64)
 
 on:
   push:
@@ -7,11 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [windows-latest, ubuntu-latest] # if I add MacOS builds even though I can't test them :skull: -> macos-latest
+    runs-on: windows-latest
 
     steps:
       # Step 1
@@ -48,34 +44,15 @@ jobs:
       # Step 8
       - name: Create ZIP archives
         run: |
-          if [[ $RUNNER_OS == 'Windows' ]]; then
-            cd ./publish
-            powershell Compress-Archive -Path (Get-ChildItem -Path . -Recurse | Select-Object -ExpandProperty FullName) -DestinationPath "../WriterSharp_${{ env.VERSION }}_win64.zip"
-          elif [[ $RUNNER_OS == 'Linux' ]]; then
-            cd ./publish
-            zip -r "../WriterSharp_${{ env.VERSION }}_linux64.zip" *
-          # MacOS down here
-          #elif [ $RUNNER_OS == 'macOS' ]; then
-            #cd ./publish
-            #zip -r "../WriterSharp_${{ env.VERSION }}.zip" *
-          fi
+          cd ./publish
+          powershell Compress-Archive -Path (Get-ChildItem -Path . -Recurse | Select-Object -ExpandProperty FullName) -DestinationPath "../WriterSharp_${{ env.VERSION }}_win64.zip"
         shell: bash
 
       # Step 9
       - name: Create TAR.GZ archives
         run: |
-          if [[ $RUNNER_OS == 'Windows' ]]; then
-            cd ./publish
-            tar -czvf "../WriterSharp_${{ env.VERSION }}_win64.tar.gz" *
-          elif [[ $RUNNER_OS == 'Linux' ]]; then
-            cd ./publish
-            tar -czvf "../WriterSharp_${{ env.VERSION }}_linux64.tar.gz" *
-          # MacOS down here
-          #elif [ $RUNNER_OS == 'macOS' ]; then
-            #cd ./publish
-            #tar -czvf "../WriterSharp_${{ env.VERSION }}.tar.gz" *
-          fi # can we talk about how YAML thinks reversing if sounds like ending an if :skull:
-        shell: bash
+          cd ./publish
+          tar -czvf "../WriterSharp_${{ env.VERSION }}_win64.tar.gz" *
 
       - name: Append Release Warning
         run:
