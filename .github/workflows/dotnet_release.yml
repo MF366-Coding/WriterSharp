@@ -7,29 +7,75 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest] # if I add MacOS builds even though I can't test them :skull: -> macos-latest
 
     steps:
+      # Step 1
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      # Step 2
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: '8.0'
 
+      # Step 3
       - name: Restore dependencies
         run: dotnet restore
 
+      # Step 4
       - name: Build the project
-        run: dotnet build --configuration Release
+        run: dotnet build --configuration Release --runtime win-x64 --framework net8.0 -p:Optimize=true
 
+      # Step 5
       - name: Run tests
         run: dotnet test
 
+      # Step 6
       - name: Publish the project
         run: dotnet publish --configuration Release --runtime win-x64 --framework net8.0 -p:Optimize=true --output ./publish
+       
+      # Step 7
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=$(echo ${GITHUB_REF} | sed 's/refs\/tags\///')" >> $GITHUB_ENV
 
+      # Step 8
+      - name: Create ZIP archives
+        run: |
+          if [ $RUNNER_OS == 'Windows' ]; then
+            cd ./publish
+            powershell Compress-Archive -Path * -DestinationPath "../WriterSharp_${{ env.VERSION }}.zip"
+          elif [ $RUNNER_OS == 'Linux' ]; then
+            cd ./publish
+            zip -r "../WriterSharp_${{ env.VERSION }}.zip" *
+          # MacOS down here
+          #elif [ $RUNNER_OS == 'macOS' ]; then
+            #cd ./publish
+            #zip -r "../WriterSharp_${{ env.VERSION }}.zip" *
+          fi
+
+      # Step 9
+      - name: Create TAR.GZ archives
+        run: |
+          if [ $RUNNER_OS == 'Windows' ]; then
+            cd ./publish
+            tar -czvf "../WriterSharp_${{ env.VERSION }}.tar.gz" *
+          elif [ $RUNNER_OS == 'Linux' ]; then
+            cd ./publish
+            tar -czvf "../WriterSharp_${{ env.VERSION }}.tar.gz" *
+          # MacOS down here
+          #elif [ $RUNNER_OS == 'macOS' ]; then
+            #cd ./publish
+            #tar -czvf "../WriterSharp_${{ env.VERSION }}.tar.gz" *
+          fi # can we talk about how YAML thinks reversing if sounds like ending an if :skull:
+
+      # Step 10
       - name: Create Release
         uses: softprops/action-gh-release@v1
 
