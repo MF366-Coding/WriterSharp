@@ -46,7 +46,6 @@ jobs:
         run: |
           cd ./publish
           powershell Compress-Archive -Path (Get-ChildItem -Path . -Recurse | Select-Object -ExpandProperty FullName) -DestinationPath "../WriterSharp_${{ env.VERSION }}_win64.zip"
-        shell: bash
 
       # Step 9
       - name: Create TAR.GZ archives
