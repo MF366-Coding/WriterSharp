@@ -59,6 +59,7 @@ jobs:
             #cd ./publish
             #zip -r "../WriterSharp_${{ env.VERSION }}.zip" *
           fi
+        shell: bash
 
       # Step 9
       - name: Create TAR.GZ archives
@@ -74,6 +75,7 @@ jobs:
             #cd ./publish
             #tar -czvf "../WriterSharp_${{ env.VERSION }}.tar.gz" *
           fi # can we talk about how YAML thinks reversing if sounds like ending an if :skull:
+        shell: bash
 
       # Step 10
       - name: Create Release
