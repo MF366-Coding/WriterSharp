@@ -50,7 +50,7 @@ jobs:
         run: |
           if [[ $RUNNER_OS == 'Windows' ]]; then
             cd ./publish
-            powershell Compress-Archive -Path * -DestinationPath "../WriterSharp_${{ env.VERSION }}_win64.zip"
+            powershell Compress-Archive -Path (Get-ChildItem -Path . -Recurse | Select-Object -ExpandProperty FullName) -DestinationPath "../WriterSharp_${{ env.VERSION }}_win64.zip"
           elif [[ $RUNNER_OS == 'Linux' ]]; then
             cd ./publish
             zip -r "../WriterSharp_${{ env.VERSION }}_linux64.zip" *
@@ -77,11 +77,18 @@ jobs:
           fi # can we talk about how YAML thinks reversing if sounds like ending an if :skull:
         shell: bash
 
+      - name: Append Release Warning
+        run:
+             echo "> [!WARNING]" >> LatestReleaseNotes.md
+             echo "> The following binaries were not compiled manually. Use them at your own risk." >> LatestReleaseNotes.md"
+
       # Step 10
       - name: Create Release
         uses: softprops/action-gh-release@v1
 
         with:
+          body_path: LatestReleaseNotes.md
+          generate_release_notes: true
           files: |
               ./*.zip
               ./*.tar.gz
