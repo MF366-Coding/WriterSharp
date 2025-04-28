@@ -26,7 +26,7 @@ jobs:
 
       # Step 4
       - name: Build the project
-        run: dotnet build --configuration Release --runtime win-x64 --framework net8.0 -p:Optimize=true
+        run: dotnet build --configuration Release --runtime win-x64 --self-contained --framework net8.0 -p:Optimize=true
 
       # Step 5
       - name: Run tests
@@ -34,7 +34,7 @@ jobs:
 
       # Step 6
       - name: Publish the project
-        run: dotnet publish --configuration Release --runtime win-x64 --framework net8.0 -p:Optimize=true --output ./publish
+        run: dotnet publish --configuration Release --runtime win-x64 --self-contained --framework net8.0 -p:Optimize=true --output ./publish
        
       # Step 7
       - name: Create ZIP archives

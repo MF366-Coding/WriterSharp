@@ -15,11 +15,11 @@
 
 		<Description>The text editor... now in C#. WriterSharp is a simple text editor, yet one you can't miss out on!</Description>
 		<FileVersion>1.0.0.0</FileVersion>
-		<InformationalVersion>1.0.0</InformationalVersion>
+		<InformationalVersion>1.0.0-alpha1</InformationalVersion>
 
 		<!-- UNCOMMENT FOR UNSTABLE RELEASES -->
-		<!-- SourceRevisisonId = <alpha/beta>@<DD><MM><YY><reviewer (6 letters)> -->
-		<SourceRevisionId>ALPHA@260425mfmatt</SourceRevisionId>
+		<!-- SourceRevisisonId = @<DD><MM><YY><reviewer (6 letters)> -->
+		<SourceRevisionId>@280425mfmatt</SourceRevisionId>
 
 		<!-- UNCOMMENT FOR STABLE RELEASES -->
 		<!-- <SourceRevisionId>stable</SourceRevisionId> -->
@@ -28,11 +28,11 @@
 		<!-- <SourceRevisionId>patch1</SourceRevisionId> -->
 
 		<!-- End of SourceRevisionId -->
-		
+
 		<!-- this setting gets overwrited if in debug mode -->
 		<RuntimeIdentifiers>win-x64;linux-x64;osx-x64;win-x86</RuntimeIdentifiers>
 		<Platforms>AnyCPU;x64;x86</Platforms>
-		
+
 		<DefineConstants>WINDOWS;LINUX;DARWIN;X86_64;X86</DefineConstants>
 		<!-- these constants will be overwritten afterwards -->
 	</PropertyGroup>
@@ -40,7 +40,7 @@
 	<!-- OS and Platform constants -->
 	<PropertyGroup>
 		<DefineConstants>UNIVERSAL</DefineConstants>
-		
+
 		<!-- Windows (64 bit) -->
 		<DefineConstants Condition="'$(RuntimeIdentifier)' == 'win-x64'">
 			WINDOWS;X86_64
