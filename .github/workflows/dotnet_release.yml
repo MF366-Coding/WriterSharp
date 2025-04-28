@@ -50,10 +50,10 @@ jobs:
         run: |
           if [ $RUNNER_OS == 'Windows' ]; then
             cd ./publish
-            powershell Compress-Archive -Path * -DestinationPath "../WriterSharp_${{ env.VERSION }}.zip"
+            powershell Compress-Archive -Path * -DestinationPath "../WriterSharp_${{ env.VERSION }}_win64.zip"
           elif [ $RUNNER_OS == 'Linux' ]; then
             cd ./publish
-            zip -r "../WriterSharp_${{ env.VERSION }}.zip" *
+            zip -r "../WriterSharp_${{ env.VERSION }}_linux64.zip" *
           # MacOS down here
           #elif [ $RUNNER_OS == 'macOS' ]; then
             #cd ./publish
@@ -65,10 +65,10 @@ jobs:
         run: |
           if [ $RUNNER_OS == 'Windows' ]; then
             cd ./publish
-            tar -czvf "../WriterSharp_${{ env.VERSION }}.tar.gz" *
+            tar -czvf "../WriterSharp_${{ env.VERSION }}_win64.tar.gz" *
           elif [ $RUNNER_OS == 'Linux' ]; then
             cd ./publish
-            tar -czvf "../WriterSharp_${{ env.VERSION }}.tar.gz" *
+            tar -czvf "../WriterSharp_${{ env.VERSION }}_linux64.tar.gz" *
           # MacOS down here
           #elif [ $RUNNER_OS == 'macOS' ]; then
             #cd ./publish
@@ -80,7 +80,9 @@ jobs:
         uses: softprops/action-gh-release@v1
 
         with:
-          files: ./publish/**/*
+          files: |
+              ./*.zip
+              ./*.tar.gz
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
