@@ -55,7 +55,7 @@ jobs:
 
       # Step 10
       - name: Append Release Warning
-        run:
+        run: |
              echo "> [!WARNING]" >> LatestReleaseNotes.md
              echo "Output Part 1"
              echo "> The following binaries were not compiled manually. Use them at your own risk." >> LatestReleaseNotes.md
