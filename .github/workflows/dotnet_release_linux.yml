@@ -58,9 +58,9 @@ jobs:
       # Step 10
       - name: Append Release Warning
         run: |
-             echo "> [!WARNING]" >> LatestReleaseNotes.md
+             echo "> [!CAUTION]" >> LatestReleaseNotes.md
              echo "Output Part 1"
-             echo "> The following binaries were not compiled manually. Use them at your own risk." >> LatestReleaseNotes.md
+             echo "> The following binaries were not compiled manually. **Use them at your own risk!**" >> LatestReleaseNotes.md
              echo "Output Part 2"
 
       # Step 11
@@ -68,6 +68,7 @@ jobs:
         uses: softprops/action-gh-release@v1
 
         with:
+          name: WriterSharp ${{ env.VERSION }}
           body_path: LatestReleaseNotes.md
           generate_release_notes: true
           files: |
