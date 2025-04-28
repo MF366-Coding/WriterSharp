@@ -2,7 +2,6 @@
 	<!-- Generic properties -->
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<InformationalVersion>1.0.0</InformationalVersion>
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
@@ -14,7 +13,7 @@
 		<Optimize>true</Optimize>
 
 		<Description>The text editor... now in C#. WriterSharp is a simple text editor, yet one you can't miss out on!</Description>
-		<FileVersion>1.0.0.0</FileVersion>
+		<FileVersion>1.0.1.0</FileVersion>
 		<InformationalVersion>1.0.0-alpha1</InformationalVersion>
 
 		<!-- UNCOMMENT FOR UNSTABLE RELEASES -->
@@ -32,41 +31,31 @@
 		<!-- this setting gets overwrited if in debug mode -->
 		<RuntimeIdentifiers>win-x64;linux-x64;osx-x64;win-x86</RuntimeIdentifiers>
 		<Platforms>AnyCPU;x64;x86</Platforms>
-
-		<DefineConstants>WINDOWS;LINUX;DARWIN;X86_64;X86</DefineConstants>
-		<!-- these constants will be overwritten afterwards -->
+		<DefineConstants>WINDOWS;LINUX;DARWIN;X86;X64</DefineConstants>
+		<DefineConstants>UNIVERSAL</DefineConstants>
 	</PropertyGroup>
 
-	<!-- OS and Platform constants -->
-	<PropertyGroup>
-		<DefineConstants>UNIVERSAL</DefineConstants>
-
+	<PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x64'">
 		<!-- Windows (64 bit) -->
-		<DefineConstants Condition="'$(RuntimeIdentifier)' == 'win-x64'">
-			WINDOWS;X86_64
-		</DefineConstants>
-		<ApplicationIcon Condition="'$(RuntimeIdentifier)' == 'win-x64'">
-			Assets\AppIcon.ico
-		</ApplicationIcon>
-
+		<DefineConstants>WINDOWS;X64</DefineConstants>
+		<ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition="'$(RuntimeIdentifier)' == 'win-x86'">
 		<!-- Windows (32 bit) -->
 		<!-- It ain't like this one will be supported for much longer but whatever... -->
-		<DefineConstants Condition="'$(RuntimeIdentifier)' == 'win-x86'">
-			WINDOWS;X86
-		</DefineConstants>
-		<ApplicationIcon Condition="'$(RuntimeIdentifier)' == 'win-x86'">
-			Assets\AppIcon.ico
-		</ApplicationIcon>
+		<DefineConstants>DARWIN;X86</DefineConstants>
+		<ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
+	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(RuntimeIdentifier)' == 'linux-x64'">
 		<!-- Linux -->
-		<DefineConstants Condition="'$(RuntimeIdentifier)' == 'linux-x64'">
-			LINUX;X86_64
-		</DefineConstants>
-
+		<DefineConstants>LINUX;X64</DefineConstants>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition="'$(RuntimeIdentifier)' == 'osx-x64'">
 		<!-- MacOS (64 bit) -->
-		<DefineConstants Condition="'$(RuntimeIdentifier)' == 'osx-x64'">
-			DARWIN;X86_64
-		</DefineConstants>
+		<DefineConstants>DARWIN;X64</DefineConstants>
 	</PropertyGroup>
 
 	<!-- Release Mode -->
@@ -112,8 +101,5 @@
 	<!-- My stuff -->
 	<ItemGroup>
 		<AvaloniaResource Include="Assets\**" />
-
-		<!-- Asset Folder -->
-		<None Include="Assets\**" Pack="true" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
 </Project>
