@@ -41,6 +41,97 @@ namespace WriterSharp
 	// TODO: add About stuff
 	// TODO: add markdown and org mode tools
 
+	#region WriterSharp Constants et al.
+	/// <summary>
+	/// WriterSharp constants and others.
+	/// </summary>
+	public struct Constants
+	{
+
+		/// <summary>
+		/// The current Assembly.
+		/// </summary>
+		readonly static Assembly currentAssembly = Assembly.GetExecutingAssembly();
+
+		/// <summary>
+		/// WriterSharp.
+		/// </summary>
+		readonly static string appName = currentAssembly.GetCustomAttribute<AssemblyTitleAttribute>()!.Title;
+
+		/// <summary>
+		/// WriterSharp's version.
+		/// </summary>
+		readonly static string appVersion = currentAssembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion;
+
+		/// <summary>
+		/// WriterSharp's source revision ID.
+		/// </summary>
+		readonly static string sourceRevisionID = appVersion.Split('+')[1];
+
+		/// <summary>
+		/// WriterSharp's version, but split into an array:
+		/// <code>{ MAJOR, MINOR, PATCH + S.R.ID }</code>
+		/// </summary>
+		readonly static string[] appVersionValues = appVersion.Split('.');
+
+		/// <summary>
+		/// The URL to WriterSharp's repository.
+		/// </summary>
+		const string REPOSITORY_URL = "https://github.com/MF366-Coding/WriterSharp";
+
+		/// <summary>
+		/// The URL to WriterSharp's website.
+		/// </summary>
+		const string WEBSITE_URL = "https://mf366-coding.github.io/writersharp.html";
+
+
+		public static string AppName
+		{
+
+			get => appName;
+
+		}
+
+		public static string AppVersion
+		{
+
+			get => appVersion;
+
+		}
+
+		public static string[] AppVersionAsArray
+		{
+
+			get => appVersionValues;
+
+		}
+
+		public static string SourceRevisionID
+		{
+
+			get => sourceRevisionID;
+
+		}
+
+		public static string WriterSharpWebURL
+		{
+
+			get => WEBSITE_URL;
+
+		}
+
+		public static string WriterSharpRepoURL
+		{
+
+			get => REPOSITORY_URL;
+
+		}
+
+	}
+	#endregion
+
+	#region WriterSharp Main Window
+
 	/// <summary>
 	/// Handles everything related to the main window.
 	/// </summary>
@@ -55,40 +146,9 @@ namespace WriterSharp
 		readonly string lineEndingMode;
 
 		/// <summary>
-		/// The current Assembly.
-		/// </summary>
-		readonly Assembly currentAssembly = Assembly.GetExecutingAssembly();
-
-		/// <summary>
 		/// The current filepath.
 		/// </summary>
 		string? currentFile = null;
-
-		/// <summary>
-		/// WriterSharp.
-		/// </summary>
-		readonly string appName;
-
-		/// <summary>
-		/// WriterSharp's version.
-		/// </summary>
-		readonly string appVersion;
-
-		/// <summary>
-		/// WriterSharp's version, but split into an array:
-		/// <code>{ MAJOR, MINOR, PATCH }</code>
-		/// </summary>
-		readonly string[] appVersionValues;
-
-		/// <summary>
-		/// The URL to WriterSharp's repository.
-		/// </summary>
-		const string REPOSITORY_URL = "https://github.com/MF366-Coding/WriterSharp";
-
-		/// <summary>
-		/// The URL to WriterSharp's website.
-		/// </summary>
-		const string WEBSITE_URL = "https://mf366-coding.github.io/writersharp.html";
 
 		/// <summary>
 		/// The WriterSharp encoding to use. Defaults to UTF-16.
@@ -181,11 +241,6 @@ namespace WriterSharp
 		/// </summary>
 		public MainWindow()
 		{
-
-			// assigning some fields
-			appName = currentAssembly.GetCustomAttribute<AssemblyTitleAttribute>()!.Title;
-			appVersion = currentAssembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()!.InformationalVersion;
-			appVersionValues = appVersion.Split('.');
 
 			// initialization
 			InitializeComponent();
@@ -693,7 +748,7 @@ namespace WriterSharp
 		{
 
 			languageIndicator.Text = $"{language} (Managed by: {languagePluginName})";
-			encodingIndicator.Text = encoding.EncodingName == "Unicode" ? "UTF-16" : encoding.EncodingName;
+			encodingIndicator.Text = encoding.EncodingName == "Unicode" ? "Unicode (UTF-16)" : encoding.EncodingName;
 			lineEndingIndicator.Text = lineEndingName.ToUpperInvariant();
 
 			isModified ??= textEditor.IsModified;
@@ -753,19 +808,40 @@ namespace WriterSharp
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private async void OnClickRepository(object? sender, RoutedEventArgs? e) => await BrowserService.OpenURLAsync(REPOSITORY_URL);
+		private async void OnClickRepository(object? sender, RoutedEventArgs? e) => await BrowserService.OpenURLAsync(Constants.WriterSharpRepoURL);
 
 		/// <summary>
 		/// Opens WriterSharp's website.
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private async void OnClickWebsite(object? sender, RoutedEventArgs? e) => await BrowserService.OpenURLAsync(WEBSITE_URL);
+		private async void OnClickWebsite(object? sender, RoutedEventArgs? e) => await BrowserService.OpenURLAsync(Constants.WriterSharpWebURL);
 
-		private void OnClickAbout(object? sender, RoutedEventArgs? e) => new AboutDialog().Show();
+		/// <summary>
+		/// Shows the About dialog.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private async void OnClickAbout(object? sender, RoutedEventArgs? e)
+		{
+
+			AboutDialog aboutDialog = new();
+			await aboutDialog.ShowDialog(this);
+
+		}
+
+		private async void OnClickLICENSE(object? sender, RoutedEventArgs e)
+		{
+
+			LicenseDialog licenseDialog = new();
+			await licenseDialog.ShowDialog(this);
+
+		}
 
 		#endregion
 
 	}
+
+	#endregion
 
 }

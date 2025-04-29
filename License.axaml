@@ -2,33 +2,36 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="250"
-        x:Class="WriterSharp.AboutDialog"
-        Title="About WriterSharp"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="550"
+        x:Class="WriterSharp.LicenseDialog"
+        Title="WriterSharp LICENSE"
 		Background="Transparent"
         TransparencyLevelHint="AcrylicBlur, Blur, Transparent"
         ExtendClientAreaToDecorationsHint="True"
         ExtendClientAreaChromeHints="NoChrome"
         SystemDecorations="None"
         CanResize="False"
-		Width="500"
-		Height="250">
+		Width="400"
+		Height="550">
 	<Border CornerRadius="20" Padding="5">
 		<Grid Margin="15">
 			<Image Source="avares://WriterSharp/Assets/WriterClassicLogoBackground.png" Stretch="UniformToFill" Opacity="0.2" />
-			<Grid ColumnDefinitions="Auto, *, Auto">
-				<Grid Grid.Column="0" Margin="10">
-					<Image Source="/Assets/Transparent.png" Width="100" Height="100"></Image>
+			<Grid RowDefinitions="*, Auto">
+				<Grid Grid.Row="0" Margin="10">
+					<TextBox Name="LicenseTextBox"
+							 HorizontalAlignment="Center"
+							 VerticalAlignment="Center"
+							 TextWrapping="Wrap"
+							 Margin="5"
+							 Text="LICENSE goes here"
+							 IsReadOnly="True"
+							 TextAlignment="Center"
+							 FontWeight="DemiBold" 
+							 Opacity="0.7" />
 				</Grid>
-				<Grid Grid.Column="1" Margin="10">
-					<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" FontWeight="DemiBold">
-						WriterSharp is a small yet powerful text and code editor, the official successor to WriterClassic.
-						Made in C# to be cross-platform, by MF366.
-					</TextBlock>
-				</Grid>
-				<Grid Grid.Column="2" Margin="10" RowDefinitions="Auto, Auto" VerticalAlignment="Center">
+				<Grid Grid.Row="1" Margin="10" RowDefinitions="Auto, Auto" VerticalAlignment="Center">
 					<Grid Grid.Row="0" Margin="5">
-						<Button HorizontalAlignment="Center" Click="OnClickLearnMore">Learn More</Button>
+						<Button HorizontalAlignment="Center" Click="OnClickLearnMore">More About the MIT License</Button>
 					</Grid>
 					<Grid Grid.Row="1" Margin="5">
 						<Button HorizontalAlignment="Center" Click="OnClickClose" IsDefault="True" Background="DarkRed" Foreground="White" FontWeight="SemiBold">Close</Button>
