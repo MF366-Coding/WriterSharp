@@ -315,7 +315,7 @@ namespace WriterSharp
 			ResetCodeEditorAttributes(String.Empty, defaultEncoding);
 			ResetFooterIndicators(
 				"Plain Text",
-				"WriterSharp",
+				"WriterSharp Essentials",
 				defaultEncoding,
 				lineEndingMode,
 				false
@@ -715,7 +715,135 @@ namespace WriterSharp
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private void OnClickExitWithoutSaving(object? sender = null, Avalonia.Interactivity.RoutedEventArgs? e = null) => Close();
+		private void OnClickExitWithoutSaving(object? sender = null, RoutedEventArgs? e = null) => Close();
+
+		/// <summary>
+		/// Handles the "Exit" event safely.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private async void OnClickSafeExit(object? sender = null, RoutedEventArgs? e = null)
+		{
+
+			var userChoice = await CheckForModifications("Do you want to save your changes before leaving WriterSharp?");
+			int retCode;
+
+			switch (userChoice)
+			{
+
+				case "No": // No modifications or user chose "no"
+					Close();
+					break;
+
+				case "Yes":
+					if (currentFile is null)
+					{
+
+						var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+						{
+
+							Title = "Save...",
+							ShowOverwritePrompt = true,
+							FileTypeChoices = [FilePickerFileTypes.All],
+							SuggestedFileName = "My_Amazing_File",
+							DefaultExtension = "txt"
+
+						});
+
+						if (file is not null)
+						{
+
+							retCode = await SaveFile(file);
+
+						}
+
+						else
+						{
+
+							retCode = 1;
+
+						}
+
+					}
+
+					else
+					{
+
+						retCode = await SaveFile(currentFile);
+
+					}
+
+					if (retCode == 0)
+					{
+
+						Close();
+
+					}
+
+					break;
+
+				default:
+					break; // do nothing
+
+			}
+
+		}
+
+		/// <summary>
+		/// Handles the "Save and Exit" event.
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		private async void OnClickSaveAndExit(object? sender, RoutedEventArgs? e = null)
+		{
+
+			int retCode;
+
+			if (currentFile is null)
+			{
+
+				var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+				{
+
+					Title = "Save...",
+					ShowOverwritePrompt = true,
+					FileTypeChoices = [FilePickerFileTypes.All],
+					SuggestedFileName = "My_Amazing_File",
+					DefaultExtension = "txt"
+
+				});
+
+				if (file is not null)
+				{
+
+					retCode = await SaveFile(file);
+
+				}
+
+				else
+				{
+
+					retCode = 1;
+
+				}
+
+			}
+
+			else
+			{
+
+				retCode = await SaveFile(currentFile);
+
+			}
+
+			if (retCode == 0)
+			{
+
+				Close();
+
+			}
+
+		}
 
 		#endregion
 

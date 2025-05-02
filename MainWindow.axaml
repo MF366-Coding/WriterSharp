@@ -15,25 +15,35 @@
 			<Grid Grid.Row="0" Grid.Column="0" Margin="4">
 				<Menu Margin="2">
 					<MenuItem Header="_File" CornerRadius="10" Padding="5">
-						<MenuItem Header="New text file" Click="OnClickNewFromScratch"></MenuItem>
-						<MenuItem Header="New from template"></MenuItem>
+						<MenuItem Header="_New text file" Click="OnClickNewFromScratch"></MenuItem>
+						<MenuItem Header="New from _template"></MenuItem>
 						<Separator></Separator>
-						<MenuItem Header="Open" Click="OnClickOpenFile"></MenuItem>
-						<MenuItem Header="Open recent file"></MenuItem>
+						<MenuItem Header="_Open" Click="OnClickOpenFile"></MenuItem>
+						<MenuItem Header="Open _recent file"></MenuItem>
 						<Separator></Separator>
-						<MenuItem Header="Save" Click="OnClickSaveFile"></MenuItem>
-						<MenuItem Header="Save as" Click="OnClickSaveAs"></MenuItem>
+						<MenuItem Header="_Save" Click="OnClickSaveFile"></MenuItem>
+						<MenuItem Header="Save _as" Click="OnClickSaveAs"></MenuItem>
+						<MenuItem Header="Save and Exit" Click="OnClickSaveAndExit"></MenuItem>
 						<Separator></Separator>
-						<MenuItem Header="Exit"></MenuItem>
+						<MenuItem Header="E_xport to HTML" />
 						<Separator></Separator>
-						<MenuItem Header="Exit without saving" Click="OnClickExitWithoutSaving"></MenuItem>
+						<MenuItem Header="_Exit" Click="OnClickSafeExit"></MenuItem>
+						<MenuItem Header="Exit _without saving" Click="OnClickExitWithoutSaving"></MenuItem>
+					</MenuItem>
+					<MenuItem Header="_Edit" CornerRadius="10" Padding="5">
+						<MenuItem Header="_Undo" Click="OnClickNewFromScratch"></MenuItem>
+						<MenuItem Header="_Redo"></MenuItem>
 					</MenuItem>
 					<MenuItem Header="_About" CornerRadius="10" Padding="5">
-						<MenuItem Header="What is WriterSharp?" Click="OnClickAbout"></MenuItem>
-						<MenuItem Header="License" Click="OnClickLICENSE"></MenuItem>
+						<MenuItem Header="What is _WriterSharp?" Click="OnClickAbout">
+							<MenuItem.Icon>
+								<Image Source="avares://WriterSharp/Assets/Resized/Transparent/Transparent16.png" />
+							</MenuItem.Icon>
+						</MenuItem>
+						<MenuItem Header="_License" Click="OnClickLICENSE"></MenuItem>
 						<Separator></Separator>
-						<MenuItem Header="Repository" Click="OnClickRepository"></MenuItem>
-						<MenuItem Header="Website" Click="OnClickWebsite"></MenuItem>
+						<MenuItem Header="_Repository" Click="OnClickRepository"></MenuItem>
+						<MenuItem Header="Web_site" Click="OnClickWebsite"></MenuItem>
 					</MenuItem>
 				</Menu>
 			</Grid>
@@ -50,20 +60,26 @@
 				</Grid>
 				<Grid Grid.Column="1" Width="255" RowDefinitions="*">
 					<ScrollViewer VerticalScrollBarVisibility="Visible" VerticalAlignment="Center">
-						<Grid Grid.Row="0" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto">
-							<Image Grid.Row="0" Grid.RowSpan="7" Source="avares://WriterSharp/Assets/WriterClassicLogoBackground.png" Stretch="UniformToFill" Opacity="0.4" OpacityMask="Gray"></Image>
+						<Grid Grid.Row="0" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
+							<Image Grid.Row="0" Grid.RowSpan="9" Source="avares://WriterSharp/Assets/WriterClassicLogoBackground.png" Stretch="UniformToFill" Opacity="0.4" OpacityMask="Gray"></Image>
 							<Grid Grid.Row="0" Margin="4">
-								<TextBlock Margin="4" FontWeight="Bold" TextWrapping="Wrap" FontSize="18">Sharp MD and Org Mode</TextBlock>
+								<TextBlock Margin="4" FontWeight="Bold" TextWrapping="Wrap" FontSize="22">Sharp Sidebar</TextBlock>
 							</Grid>
 							<Grid Grid.Row="1" Margin="4">
-								<TextBlock TextWrapping="Wrap" Margin="4">Select text and apply formatting at your liking.</TextBlock>
+								<TextBlock TextWrapping="Wrap" Margin="4">In this sidebar, you'll be able to find several other features such as Markdown and Org Mode formatting, file statistics and settings.</TextBlock>
 							</Grid>
 							<Grid Grid.Row="2">
-								<Grid Grid.Column="0" RowDefinitions="Auto, Auto">
+								<Grid Grid.Column="0" RowDefinitions="Auto, Auto, Auto, Auto">
 									<Grid Grid.Row="0" Margin="4">
-										<TextBlock Margin="4" FontWeight="DemiBold" FontSize="15">Basic formatting</TextBlock>
+										<TextBlock Margin="4" TextWrapping="Wrap" FontWeight="DemiBold" FontSize="18">Sharp MD and Org Mode</TextBlock>
 									</Grid>
-									<Grid Grid.Row="1" ColumnDefinitions="Auto, Auto, *" RowDefinitions="Auto, Auto, Auto">
+									<Grid Grid.Row="1" Margin="4">
+										<TextBlock Margin="4" TextWrapping="Wrap">Sharp Markdown and Org Mode refers to the formatting options displayed in WriterSharp's SharpSidebar.</TextBlock>
+									</Grid>
+									<Grid Grid.Row="2" Margin="4">
+										<TextBlock Margin="4" FontWeight="DemiBold" FontSize="16">Basic formatting</TextBlock>
+									</Grid>
+									<Grid Grid.Row="3" ColumnDefinitions="Auto, Auto, *" RowDefinitions="Auto, Auto, Auto">
 										<Grid Grid.Row="0" Grid.Column="0" Margin="4">
 											<Button Margin="4" Width="60" HorizontalContentAlignment="Center" FontWeight="Bold">Bold</Button>
 										</Grid>
@@ -153,6 +169,83 @@
 										</Grid>
 										<Grid Grid.Row="0" Grid.Column="1" Margin="4">
 											<Button Width="110" HorizontalContentAlignment="Center">+ HTML Table</Button>
+										</Grid>
+									</Grid>
+								</Grid>
+							</Grid>
+							<Grid Grid.Row="7">
+								<Grid Grid.Column="0" RowDefinitions="Auto, Auto, Auto, Auto">
+									<Grid Grid.Row="0" Margin="4">
+										<TextBlock Margin="4" TextWrapping="Wrap" FontWeight="DemiBold" FontSize="18">File Statistics</TextBlock>
+									</Grid>
+									<Grid Grid.Row="1" Margin="4">
+										<TextBlock Margin="4" TextWrapping="Wrap">Calculating the file's statistics is an expensive operation! Don't do it too often...</TextBlock>
+									</Grid>
+									<Grid Grid.Row="2" ColumnDefinitions="Auto, *" RowDefinitions="Auto">
+										<Grid Grid.Row="0" Grid.Column="0" Margin="4">
+											<Button Margin="4" Width="235" HorizontalContentAlignment="Center">Re-calculate</Button>
+										</Grid>
+									</Grid>
+									<Grid Grid.Row="3" ColumnDefinitions="Auto, Auto" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
+										<Grid Grid.Row="0" Grid.Column="0" Margin="4">
+											<TextBlock VerticalAlignment="Center" Margin="4" FontWeight="DemiBold">
+												Line count:
+											</TextBlock>
+										</Grid>
+										<Grid Grid.Row="0" Grid.Column="1" Margin="4">
+											<TextBlock Width="150" VerticalAlignment="Center">
+												0
+											</TextBlock>
+										</Grid>
+										<Grid Grid.Row="1" Grid.Column="0" Margin="4">
+											<TextBlock VerticalAlignment="Center" Margin="4" FontWeight="DemiBold">
+												Word count:
+											</TextBlock>
+										</Grid>
+										<Grid Grid.Row="1" Grid.Column="1" Margin="4">
+											<TextBlock Width="150" VerticalAlignment="Center">
+												0
+											</TextBlock>
+										</Grid>
+										<Grid Grid.Row="2" Grid.Column="0" Margin="4">
+											<TextBlock VerticalAlignment="Center" Margin="4" FontWeight="DemiBold">
+												Semicolon count:
+											</TextBlock>
+										</Grid>
+										<Grid Grid.Row="2" Grid.Column="1" Margin="4">
+											<TextBlock Width="150" VerticalAlignment="Center">
+												0
+											</TextBlock>
+										</Grid>
+										<Grid Grid.Row="3" Grid.Column="0" Margin="4">
+											<TextBlock VerticalAlignment="Center" Margin="4" FontWeight="DemiBold">
+												Dot count:
+											</TextBlock>
+										</Grid>
+										<Grid Grid.Row="3" Grid.Column="1" Margin="4">
+											<TextBlock Width="150" VerticalAlignment="Center">
+												0
+											</TextBlock>
+										</Grid>
+										<Grid Grid.Row="4" Grid.Column="0" Margin="4">
+											<TextBlock VerticalAlignment="Center" Margin="4" FontWeight="DemiBold">
+												Comma count:
+											</TextBlock>
+										</Grid>
+										<Grid Grid.Row="4" Grid.Column="1" Margin="4">
+											<TextBlock Width="150" VerticalAlignment="Center">
+												0
+											</TextBlock>
+										</Grid>
+										<Grid Grid.Row="5" Grid.Column="0" Margin="4">
+											<TextBlock VerticalAlignment="Center" Margin="4" FontWeight="DemiBold">
+												Dot/Comma Ratio:
+											</TextBlock>
+										</Grid>
+										<Grid Grid.Row="5" Grid.Column="1" Margin="4">
+											<TextBlock Width="150" VerticalAlignment="Center">
+												0
+											</TextBlock>
 										</Grid>
 									</Grid>
 								</Grid>
