@@ -27,7 +27,11 @@
 						<Separator></Separator>
 						<MenuItem Header="E_xport to HTML" />
 						<Separator></Separator>
-						<MenuItem Header="_Exit" Click="OnClickSafeExit"></MenuItem>
+						<MenuItem Header="_Exit" Click="OnClickSafeExit">
+							<MenuItem.Icon>
+								<Image Source="/Assets/UI/error.ico" />
+							</MenuItem.Icon>
+						</MenuItem>
 						<MenuItem Header="Exit _without saving" Click="OnClickExitWithoutSaving"></MenuItem>
 					</MenuItem>
 					<MenuItem Header="_Edit" CornerRadius="10" Padding="5">
