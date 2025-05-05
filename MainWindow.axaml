@@ -15,28 +15,60 @@
 			<Grid Grid.Row="0" Grid.Column="0" Margin="4">
 				<Menu Margin="2">
 					<MenuItem Header="_File" CornerRadius="10" Padding="5">
-						<MenuItem Header="_New text file" Click="OnClickNewFromScratch"></MenuItem>
+						<MenuItem Header="_New text file" Click="OnClickNewFromScratch">
+							<MenuItem.Icon>
+								<Image Source="avares://WriterSharp/Assets/UI/Dark/New.png" />
+							</MenuItem.Icon>
+						</MenuItem>
 						<MenuItem Header="New from _template"></MenuItem>
 						<Separator></Separator>
-						<MenuItem Header="_Open" Click="OnClickOpenFile"></MenuItem>
+						<MenuItem Header="_Open" Click="OnClickOpenFile">
+							<MenuItem.Icon>
+								<Image Source="avares://WriterSharp/Assets/UI/Dark/Open.png" />
+							</MenuItem.Icon>
+						</MenuItem>
 						<MenuItem Header="Open _recent file"></MenuItem>
 						<Separator></Separator>
-						<MenuItem Header="_Save" Click="OnClickSaveFile"></MenuItem>
-						<MenuItem Header="Save _as" Click="OnClickSaveAs"></MenuItem>
-						<MenuItem Header="Save and Exit" Click="OnClickSaveAndExit"></MenuItem>
+						<MenuItem Header="_Save" Click="OnClickSaveFile">
+							<MenuItem.Icon>
+								<Image Source="avares://WriterSharp/Assets/UI/Dark/Save.png" />
+							</MenuItem.Icon>
+						</MenuItem>
+						<MenuItem Header="Save _as" Click="OnClickSaveAs">
+							<MenuItem.Icon>
+								<Image Source="avares://WriterSharp/Assets/UI/Dark/SaveAs.png" />
+							</MenuItem.Icon>
+						</MenuItem>
+						<MenuItem Header="Save and Exit" Click="OnClickSaveAndExit">
+							<MenuItem.Icon>
+								<Image Source="avares://WriterSharp/Assets/UI/Dark/SaveAndExit.png" />
+							</MenuItem.Icon>
+						</MenuItem>
 						<Separator></Separator>
-						<MenuItem Header="E_xport to HTML" />
+						<MenuItem Header="E_xport to HTML">
+							<MenuItem.Icon>
+								<Image Source="avares://WriterSharp/Assets/UI/Dark/ExportToHTML.png" />
+							</MenuItem.Icon>
+						</MenuItem>
 						<Separator></Separator>
 						<MenuItem Header="_Exit" Click="OnClickSafeExit">
 							<MenuItem.Icon>
-								<Image Source="/Assets/UI/error.ico" />
+								<Image Source="avares://WriterSharp/Assets/UI/Dark/Close.png" />
 							</MenuItem.Icon>
 						</MenuItem>
 						<MenuItem Header="Exit _without saving" Click="OnClickExitWithoutSaving"></MenuItem>
 					</MenuItem>
 					<MenuItem Header="_Edit" CornerRadius="10" Padding="5">
-						<MenuItem Header="_Undo" Click="OnClickNewFromScratch"></MenuItem>
-						<MenuItem Header="_Redo"></MenuItem>
+						<MenuItem Header="_Undo">
+							<MenuItem.Icon>
+								<Image Source="avares://WriterSharp/Assets/UI/Dark/Undo.png" />
+							</MenuItem.Icon>
+						</MenuItem>
+						<MenuItem Header="_Redo">
+							<MenuItem.Icon>
+								<Image Source="avares://WriterSharp/Assets/UI/Dark/Redo.png" />
+							</MenuItem.Icon>
+						</MenuItem>
 					</MenuItem>
 					<MenuItem Header="_About" CornerRadius="10" Padding="5">
 						<MenuItem Header="What is _WriterSharp?" Click="OnClickAbout">
@@ -46,8 +78,16 @@
 						</MenuItem>
 						<MenuItem Header="_License" Click="OnClickLICENSE"></MenuItem>
 						<Separator></Separator>
-						<MenuItem Header="_Repository" Click="OnClickRepository"></MenuItem>
-						<MenuItem Header="Web_site" Click="OnClickWebsite"></MenuItem>
+						<MenuItem Header="_Repository" Click="OnClickRepository">
+							<MenuItem.Icon>
+								<Image Source="avares://WriterSharp/Assets/UI/Dark/Repository.png" />
+							</MenuItem.Icon>
+						</MenuItem>
+						<MenuItem Header="Web_site" Click="OnClickWebsite">
+							<MenuItem.Icon>
+								<Image Source="avares://WriterSharp/Assets/UI/Dark/Web.png" />
+							</MenuItem.Icon>
+						</MenuItem>
 					</MenuItem>
 				</Menu>
 			</Grid>
