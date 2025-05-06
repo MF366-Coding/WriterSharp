@@ -21,6 +21,8 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
+using Avalonia.Input;
+using Avalonia.Styling;
 using AvaloniaEdit;
 
 // Message Box
@@ -29,16 +31,17 @@ using MsBox.Avalonia.Dto;
 
 // Internal
 using WriterSharp.Browser;
+using System.Windows.Input;
+using System.ComponentModel;
+using Avalonia;
 
 
 namespace WriterSharp
 {
 
 	// TODO: add locale settings and support
-	// TODO: add sidebar
 	// TODO: add plugin support
 	// TODO: add "Export"
-	// TODO: add About stuff
 	// TODO: add markdown and org mode tools
 
 	#region WriterSharp Constants et al.
@@ -130,6 +133,69 @@ namespace WriterSharp
 	}
 	#endregion
 
+	#region WriterSharp Themes and Backgrounds
+
+	/// <summary>
+	/// An enum containing all possible themes, including auto-detection.
+	/// </summary>
+	public enum WriterSharpTheme : byte { AutoDetect, Light, Dark }
+
+	/// <summary>
+	/// An enum containing all of the possible WriterSharp backgrounds.
+	/// </summary>
+	public enum WriterSharpBackground : byte { Blue, Green, Orange, Pink }
+
+	#endregion
+
+	#region Dumb Command Thing
+
+	/// <summary>
+	/// Simple Command class.
+	/// </summary>
+	public class Command : ICommand
+	{
+
+#pragma warning disable IDE1006 // Naming Styles
+		private readonly Action _execute;
+		private readonly Func<bool>? _canExecute;
+#pragma warning restore IDE1006 // Naming Styles
+
+		/// <summary>
+		/// Creates a command given an action.
+		/// </summary>
+		/// <param name="execute">The action.</param>
+		/// <param name="canExecute">
+		/// A function with no parameters of return type bool that
+		/// defines whether the command can be executed or not.
+		/// </param>
+		public Command(Action execute, Func<bool>? canExecute = null)
+		{
+
+			_execute = execute;
+			_canExecute = canExecute;
+
+		}
+
+		/// <summary>
+		/// Whether the command can be executed.
+		/// </summary>
+		/// <returns>A boolean</returns>
+		public bool CanExecute(object? parameter) => _canExecute?.Invoke() ?? true;
+
+		/// <summary>
+		/// Executes the action.
+		/// </summary>
+		public void Execute(object? parameter) => _execute();
+
+		/// <summary>
+		/// Handles a change in the "executability".
+		/// </summary>
+		public event EventHandler? CanExecuteChanged;
+
+	}
+
+	#endregion
+
 	#region WriterSharp Main Window
 
 	/// <summary>
@@ -208,6 +274,11 @@ namespace WriterSharp
 		#region UI Components
 
 		/// <summary>
+		/// The WriterSharp app.
+		/// </summary>
+		readonly Application? app;
+
+		/// <summary>
 		/// WriterSharp's code editor.
 		/// </summary>
 		readonly TextEditor textEditor;
@@ -245,13 +316,15 @@ namespace WriterSharp
 			// initialization
 			InitializeComponent();
 
-			#if WINDOWS
+#if WINDOWS
 				lineEndingMode = "CRLF";
 
-			#else
-				lineEndingMode = "LF";
+#else
+			lineEndingMode = "LF";
 
-			#endif
+#endif
+
+			app = Application.Current;
 
 			textEditor = this.FindControl<TextEditor>("MainCodeEditor")!;
 
@@ -259,6 +332,8 @@ namespace WriterSharp
 			languageIndicator = this.FindControl<TextBlock>("LangInd")!;
 			lineEndingIndicator = this.FindControl<TextBlock>("LEnInd")!;
 			modifiedIndicator = this.FindControl<TextBlock>("ModInd")!;
+
+			BindAll();
 
 			CreateNewFileFromScratch();
 
@@ -330,7 +405,7 @@ namespace WriterSharp
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private async void OnClickNewFromScratch(object? sender, RoutedEventArgs e)
+		private async void OnClickNewFromScratch(object? sender, RoutedEventArgs? e)
 		{
 
 			var userChoice = await CheckForModifications("Do you want to save your changes before creating a new file?");
@@ -380,7 +455,7 @@ namespace WriterSharp
 						retCode = await SaveFile(currentFile);
 
 					}
-					
+
 					if (retCode == 0)
 					{
 
@@ -408,7 +483,7 @@ namespace WriterSharp
 		/// </summary>
 		/// <param name="filepath">The file to open, as a string</param>
 		/// <returns></returns>
-		private async Task OpenFile(string filepath)
+		internal async Task OpenFile(string filepath)
 		{
 
 			try
@@ -467,7 +542,7 @@ namespace WriterSharp
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private async void OnClickOpenFile(object? sender, RoutedEventArgs e)
+		private async void OnClickOpenFile(object? sender, RoutedEventArgs? e)
 		{
 
 			var userChoice = await CheckForModifications("Do you want to save your changes before creating a new file?");
@@ -632,7 +707,7 @@ namespace WriterSharp
 				return 1;
 
 			}
-			
+
 		}
 
 		/// <summary>
@@ -640,7 +715,7 @@ namespace WriterSharp
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private async void OnClickSaveFile(object? sender, RoutedEventArgs e)
+		private async void OnClickSaveFile(object? sender, RoutedEventArgs? e)
 		{
 
 			if (currentFile is null)
@@ -680,7 +755,7 @@ namespace WriterSharp
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
-		private async void OnClickSaveAs(object? sender, RoutedEventArgs e)
+		private async void OnClickSaveAs(object? sender, RoutedEventArgs? e)
 		{
 
 			var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
@@ -705,17 +780,26 @@ namespace WriterSharp
 
 		#endregion
 
-		#region Handling WriterSharp Exit
-
-		// TODO: add regular exit method
-		// TODO: make the 'X' button follow the regular exit instead of being a destructive exit
+		#region Editing
 
 		/// <summary>
-		/// Exits WriterSharp without asking for confirmation.
+		/// Undoes latest change.
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void OnClickExitWithoutSaving(object? sender = null, RoutedEventArgs? e = null) => Close();
+		private void OnClickUndo(object? sender, RoutedEventArgs? e) => textEditor.Undo();
+
+		/// <summary>
+		/// Redoes latest change.
+		/// </summary>
+		private void OnClickRedo(object? sender, RoutedEventArgs? e) => textEditor.Redo();
+
+		#endregion
+
+		#region Handling WriterSharp Exit
+
+		/// <summary>
+		/// Force terminate.
+		/// </summary>
+		private void OnClickTerminate(object? sender, RoutedEventArgs? e) => Environment.Exit(0);
 
 		/// <summary>
 		/// Handles the "Exit" event safely.
@@ -732,7 +816,7 @@ namespace WriterSharp
 			{
 
 				case "No": // No modifications or user chose "no"
-					Close();
+					Environment.Exit(0);
 					break;
 
 				case "Yes":
@@ -776,7 +860,78 @@ namespace WriterSharp
 					if (retCode == 0)
 					{
 
-						Close();
+						Environment.Exit(0);
+
+					}
+
+					break;
+
+				default:
+					break; // do nothing
+
+			}
+
+		}
+
+		/// <summary>
+		/// Handle window closing. (Alt + F4)
+		/// </summary>
+		private async void OnWindowClosing(object? sender, WindowClosingEventArgs e)
+		{
+
+			e.Cancel = true;
+			var userChoice = await CheckForModifications("Do you want to save your changes before leaving WriterSharp?");
+			int retCode;
+
+			switch (userChoice)
+			{
+
+				case "No": // No modifications or user chose "no"
+					Environment.Exit(0);
+					break;
+
+				case "Yes":
+					if (currentFile is null)
+					{
+
+						var file = await StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
+						{
+
+							Title = "Save...",
+							ShowOverwritePrompt = true,
+							FileTypeChoices = [FilePickerFileTypes.All],
+							SuggestedFileName = "My_Amazing_File",
+							DefaultExtension = "txt"
+
+						});
+
+						if (file is not null)
+						{
+
+							retCode = await SaveFile(file);
+
+						}
+
+						else
+						{
+
+							retCode = 1;
+
+						}
+
+					}
+
+					else
+					{
+
+						retCode = await SaveFile(currentFile);
+
+					}
+
+					if (retCode == 0)
+					{
+
+						Environment.Exit(0);
 
 					}
 
@@ -839,7 +994,7 @@ namespace WriterSharp
 			if (retCode == 0)
 			{
 
-				Close();
+				Environment.Exit(0);
 
 			}
 
@@ -848,6 +1003,28 @@ namespace WriterSharp
 		#endregion
 
 		#region Helper Methods
+
+		/// <summary>
+		/// Changes WriterSharp's theme.
+		/// </summary>
+		/// <param name="theme">The theme to apply</param>
+		/// <exception cref="NullReferenceException">THe app data is null</exception>
+		public void ChangeTheme(WriterSharpTheme theme)
+		{
+
+			if (app is null) throw new NullReferenceException("App is null");
+
+			if (theme == WriterSharpTheme.AutoDetect)
+			{
+
+				app.RequestedThemeVariant = ThemeVariant.Default;
+				return;
+
+			}
+
+			app.RequestedThemeVariant = theme == WriterSharpTheme.Light ? ThemeVariant.Light : ThemeVariant.Dark;
+
+		}
 
 		/// <summary>
 		/// Resets the code editor's attributes.
@@ -963,6 +1140,90 @@ namespace WriterSharp
 
 			LicenseDialog licenseDialog = new();
 			await licenseDialog.ShowDialog(this);
+
+		}
+
+		#endregion
+
+		#region Bindings
+
+		/// <summary>
+		/// Binds all of the hardcoded WriterSharp bindings.
+		/// </summary>
+		protected internal void BindAll()
+		{
+
+			#region New
+
+			KeyBindings.Add(new()
+			{
+
+				Gesture = new(Key.N, KeyModifiers.Control),
+				Command = new Command(() => OnClickNewFromScratch(null, null))
+
+			});
+
+			#endregion
+
+			#region Open
+
+			KeyBindings.Add(new()
+			{
+
+				Gesture = new(Key.O, KeyModifiers.Control),
+				Command = new Command(() => OnClickOpenFile(this, null))
+
+			});
+
+			#endregion
+
+			#region Save
+
+			KeyBindings.Add(new()
+			{
+
+				Gesture = new(Key.S, KeyModifiers.Control),
+				Command = new Command(() => OnClickSaveFile(this, null))
+
+			});
+
+			#endregion
+
+			#region Save As
+
+			KeyBindings.Add(new()
+			{
+
+				Gesture = new(Key.S, KeyModifiers.Control | KeyModifiers.Shift),
+				Command = new Command(() => OnClickSaveAs(this, null))
+
+			});
+
+			#endregion
+
+			#region Undo
+
+			KeyBindings.Add(new()
+			{
+
+				Gesture = new(Key.Z, KeyModifiers.Control),
+				Command = new Command(() => textEditor.Undo())
+
+			});
+
+			#endregion
+
+			#region Redo
+
+			KeyBindings.Add(new()
+			{
+
+				Gesture = new(Key.Y, KeyModifiers.Control),
+				Command = new Command(() => textEditor.Redo())
+
+			});
+
+			#endregion
 
 		}
 
