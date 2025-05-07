@@ -190,7 +190,9 @@ namespace WriterSharp
 		/// <summary>
 		/// Handles a change in the "executability".
 		/// </summary>
+		#pragma warning disable CS0067
 		public event EventHandler? CanExecuteChanged;
+		#pragma warning restore CS0067
 
 	}
 
@@ -316,13 +318,13 @@ namespace WriterSharp
 			// initialization
 			InitializeComponent();
 
-#if WINDOWS
+			#if WINDOWS
 				lineEndingMode = "CRLF";
 
-#else
-			lineEndingMode = "LF";
+			#else
+				lineEndingMode = "LF";
 
-#endif
+			#endif
 
 			app = Application.Current;
 
@@ -1003,6 +1005,13 @@ namespace WriterSharp
 		#endregion
 
 		#region Helper Methods
+
+		public void ChangeLanguage()
+		{
+
+			throw new NotImplementedException("Gotta implement languages first lolz."); // todo
+
+		}
 
 		/// <summary>
 		/// Changes WriterSharp's theme.

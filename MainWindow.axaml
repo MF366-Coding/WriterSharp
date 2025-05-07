@@ -2,7 +2,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        xmlns:t="clr-namespace:WriterSharp.Translations;assembly=WriterSharp"
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="WriterSharp.MainWindow"
 		xmlns:AvaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
 		Icon="avares://WriterSharp/Assets/TransparentIcon.ico"
@@ -116,7 +117,8 @@
 										<TextBlock Margin="4" TextWrapping="Wrap" FontWeight="DemiBold" FontSize="18">Search by...</TextBlock>
 									</Grid>
 									<Grid Grid.Row="1" Margin="4">
-										<TextBox Name="SearchBox" FontFamily="Inter,Cascadia Code,Consolas,Menlo,Monospace"></TextBox>
+										<TextBox Name="SearchBox" FontFamily="Inter,Cascadia Code,Consolas,Menlo,Monospace"
+												 t:TranslationProperties.Translatable="False"></TextBox>
 									</Grid>
 									<Grid Grid.Row="2" ColumnDefinitions="Auto, Auto" RowDefinitions="Auto, Auto">
 										<Grid Grid.Row="0" ColumnDefinitions="Auto, Auto">
