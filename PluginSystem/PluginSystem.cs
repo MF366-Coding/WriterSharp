@@ -14,8 +14,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Xml;
-using Avalonia.Win32.Interop.Automation;
+
+// Dependencies
+using TextMateSharp.Grammars;
 
 
 namespace WriterSharp
@@ -24,7 +27,7 @@ namespace WriterSharp
 	/// <summary>
 	/// Interface for translation datapacks.
 	/// </summary>
-	public interface ITranslation
+	public class WriterSharpTranslation
 	{
 
 		/// <summary>
@@ -33,9 +36,14 @@ namespace WriterSharp
 		public string PluginName { get; set; }
 
 		/// <summary>
+		/// English name (0) and Actual Name (1).
+		/// </summary>
+		public string[] TranslationNames { get; set; }
+
+		/// <summary>
 		/// The actual translation itself, as a dictionary.
 		/// </summary>
-		protected Dictionary<string, string> Translation { get; set; }
+		protected Dictionary<string, string>? Translation { get; set; }
 
 		/// <summary>
 		/// Assign or access a translation key.
@@ -46,14 +54,24 @@ namespace WriterSharp
 		public string? this[string key]
 		{
 
-			get => Translation.GetValueOrDefault(key);
+			get => Translation?.GetValueOrDefault(key);
 			set
 			{
 
+				if (Translation is null) return;
 				if (value is null) throw new ArgumentNullException(nameof(value), "Value to assign may not be null");
 				else Translation.Add(key, value);
 
 			}
+
+		}
+
+		public WriterSharpTranslation(string plugin, string englishName, string realName, string translationFile)
+		{
+
+			PluginName = plugin;
+			TranslationNames = [englishName, realName];
+			// todo: work on dis
 
 		}
 
@@ -62,7 +80,7 @@ namespace WriterSharp
 	/// <summary>
 	/// Interface for syntax highlighting themes.
 	/// </summary>
-	public interface ISyntaxColormap
+	public class SyntaxColormap
 	{
 
 		/// <summary>
@@ -71,9 +89,23 @@ namespace WriterSharp
 		public string PluginName { get; set; }
 
 		/// <summary>
+		/// The mode this theme supports (use Auto for any).
+		/// </summary>
+		public WriterSharpTheme ThemeMode { get; set; }
+
+		/// <summary>
 		/// The actual colormap itself, as a dictionary.
 		/// </summary>
-		protected Dictionary<string, string> Colormap { get; set; }
+		protected Dictionary<string, string>? Colormap { get; set; }
+
+		public SyntaxColormap(string plugin, WriterSharpTheme theme, string colormapFile)
+		{
+
+			PluginName = plugin;
+			ThemeMode = theme;
+			// todo: work on dis
+
+		}
 
 		/// <summary>
 		/// Assign or access a colormap key.
@@ -84,14 +116,48 @@ namespace WriterSharp
 		public string? this[string key]
 		{
 
-			get => Colormap.GetValueOrDefault(key);
+			get => Colormap?.GetValueOrDefault(key);
 			set
 			{
 
+				if (Colormap is null) return;
 				if (value is null) throw new ArgumentNullException(nameof(value), "Value to assign may not be null");
 				else Colormap.Add(key, value);
 
 			}
+
+		}
+
+	}
+
+	/// <summary>
+	/// Interface for WriterSharp languages.
+	/// </summary>
+	public class Language
+	{
+
+		/// <summary>
+		/// The name of the plugin that manages this language.
+		/// </summary>
+		public string PluginName { get; set; }
+
+		/// <summary>
+		/// The name of this language.
+		/// </summary>
+		public string LanguageName { get; set; }
+
+		/// <summary>
+		/// The grammar/syntax for this language.
+		/// </summary>
+		public Grammar? Grammar { get; set; }
+
+		// todo
+		public Language(string plugin, string language, string grammarFile)
+		{
+
+			PluginName = plugin;
+			LanguageName = language;
+			// todo: work on dis
 
 		}
 
@@ -108,12 +174,12 @@ namespace WriterSharp
 		/// <summary>
 		/// Translations.
 		/// </summary>
-		ITranslation[] translations;
+		WriterSharpTranslation[] translations;
 
 		/// <summary>
 		/// Colormaps.
 		/// </summary>
-		ISyntaxColormap[] colormaps;
+		SyntaxColormap[] colormaps;
 
 	}
 
@@ -129,6 +195,11 @@ namespace WriterSharp
 
 		}
 
+		/// <summary>
+		/// Checks if a plugin is supported by the current version of WriterSharp.
+		/// </summary>
+		/// <param name="requiredVersion">The required version, as a string</param>
+		/// <returns>A boolean (is supported?)</returns>
 		internal static bool IsPluginSupported(string requiredVersion)
 		{
 
@@ -189,9 +260,37 @@ namespace WriterSharp
 
 					return patch > myPatch;
 
+				case ">=":
+					// greater or equal
+					if (major > myMajor) return false;
+					if (major <= myMajor) return true;
+
+					if (minor > myMinorValue) return false;
+					if (minor <= myMinorValue) return true;
+
+					return patch <= myPatch;
+
+				case "<=":
+					// lower or equal
+					if (major < myMajor) return false;
+					if (major >= myMajor) return true;
+
+					if (minor < myMinorValue) return false;
+					if (minor >= myMinorValue) return true;
+
+					return patch >= myPatch;
+
+				default:
+					return false;
+
 			}
 
-			return false; // todo: placeholder
+		}
+
+		private static Task HandlePluginLanguages(XmlNodeList languages)
+		{
+
+			throw new NotImplementedException("TODO"); // todo
 
 		}
 
@@ -203,6 +302,7 @@ namespace WriterSharp
 
 			string? pluginInnerName = root.Attributes["InnerName"]?.Value;
 			if (pluginInnerName is null) { plugin = null; return; }
+			// todo: innername must be unique		
 
 			string pluginName = root.Attributes["Name"]?.Value ?? pluginInnerName;
 
@@ -210,7 +310,31 @@ namespace WriterSharp
 
 			if (!IsPluginSupported(pluginRequiresVersion)) { plugin = null; return; }
 
-			plugin = null; // TODO: placeholder
+			/*
+			 * What does not matter for WriterSharp (heavy metadata)
+			 * 
+			 * AuthorName
+			 * AuthorEmail
+			 * OrganizationName
+			 * OrganizationEmail
+			 * PluginWebsite
+			 * PluginRepository
+			 * Description
+			 * License
+			 * ReadMe
+			 * 
+			 * That only matters for the WriterSharp package manager => W#-get
+			 * The only exception to the "Don't say Writer#" rule
+			 * 
+			 */
+
+			string pluginVersion = root.Attributes["PluginVersion"]?.Value ?? "untracked"; // defaults to untracked if none was specified
+
+			// now, for the real deal
+			var languages = root.GetElementsByTagName("Language"); // get languages
+			HandlePluginLanguages(languages); // todo
+
+			plugin = null; // todo
 
 		}
 
