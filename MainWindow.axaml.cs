@@ -16,31 +16,34 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 // Avalonia
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using Avalonia.Input;
 using Avalonia.Styling;
 using AvaloniaEdit;
+using AvaloniaEdit.TextMate;
 
 // Message Box
 using MsBox.Avalonia;
 using MsBox.Avalonia.Dto;
 
+// Dependencies
+using TextMateSharp.Grammars;
+using TextMateSharp.Themes;
+
 // Internal
 using WriterSharp.Browser;
-using System.Windows.Input;
-using System.ComponentModel;
-using Avalonia;
 
 
 namespace WriterSharp
 {
 
 	// TODO: add locale settings and support
-	// TODO: add plugin support
 	// TODO: add "Export"
 	// TODO: add markdown and org mode tools
 
@@ -209,6 +212,33 @@ namespace WriterSharp
 		#region Fields
 
 		/// <summary>
+		/// The dictionary of custom WriterSharp translations.
+		/// <strong>CODENAME -- TRANSLATION</strong>
+		/// </summary>
+		readonly Dictionary<string, WriterSharpTranslation> uiTranslations = [];
+
+		/// <summary>
+		/// The dictionary of custom WriterSharp languages (with plugins).
+		/// <strong>EXTENSION -- LANGUAGE</strong>
+		/// </summary>
+		readonly Dictionary<string, Language> languages = [];
+
+		/// <summary>
+		/// Represents the current language.
+		/// </summary>
+		Language? currentLanguage = null;
+
+		/// <summary>
+		/// The current installation of TextMate.
+		/// </summary>
+		TextMate.Installation textMateInstallation;
+
+		/// <summary>
+		/// The TextMate registry options.
+		/// </summary>
+		RegistryOptions registryOptions;
+
+		/// <summary>
 		/// The line ending mode to use.
 		/// </summary>
 		readonly string lineEndingMode;
@@ -222,6 +252,10 @@ namespace WriterSharp
 		/// The WriterSharp encoding to use. Defaults to UTF-16.
 		/// </summary>
 		readonly Encoding defaultEncoding = Encoding.Unicode;
+
+		#endregion
+
+		#region MessageBox Templates
 
 		/// <summary>
 		/// Custom message box parameters for errors.
@@ -337,6 +371,9 @@ namespace WriterSharp
 
 			BindAll();
 
+			registryOptions = new(ThemeName.DarkPlus);
+			textMateInstallation = textEditor.InstallTextMate(registryOptions);
+
 			CreateNewFileFromScratch();
 
 		}
@@ -399,6 +436,7 @@ namespace WriterSharp
 			);
 			currentFile = null;
 			UpdateWindowTitleToMatchNameFilePattern();
+			ApplyTextMateGrammar(ThemeName.DarkPlus); // todo
 
 		}
 
@@ -497,6 +535,7 @@ namespace WriterSharp
 				ResetFooterIndicators("Plain Text", "WriterSharp Essentials", defaultEncoding, lineEndingMode, false); // TODO: add language and plugin support
 				currentFile = filepath;
 				UpdateWindowTitleToMatchNameFilePattern();
+				ApplyTextMateGrammar(ThemeName.DarkPlus); // todo
 
 			}
 			catch (Exception)
@@ -528,6 +567,7 @@ namespace WriterSharp
 				ResetFooterIndicators("Plain Text", "WriterSharp Essentials", streamReader.CurrentEncoding, lineEndingMode, false); // TODO: add language and plugin support
 				currentFile = file.TryGetLocalPath();
 				UpdateWindowTitleToMatchNameFilePattern();
+				ApplyTextMateGrammar(ThemeName.DarkPlus); // todo: don't do this
 
 			}
 			catch (Exception)
@@ -667,6 +707,7 @@ namespace WriterSharp
 				ResetFooterIndicators("Plain Text", "WriterSharp Essentials", textEditor.Encoding, lineEndingMode, false); // TODO: add language and plugin support
 				currentFile = filepath;
 				UpdateWindowTitleToMatchNameFilePattern();
+				ApplyTextMateGrammar(ThemeName.DarkPlus);
 				return 0;
 
 			}
@@ -699,6 +740,7 @@ namespace WriterSharp
 				ResetFooterIndicators("Plain Text", "WriterSharp Essentials", textEditor.Encoding, lineEndingMode, false); // TODO: add language and plugin support
 				currentFile = file.TryGetLocalPath();
 				UpdateWindowTitleToMatchNameFilePattern();
+				ApplyTextMateGrammar(ThemeName.DarkPlus);
 				return 0;
 
 			}
@@ -1032,6 +1074,65 @@ namespace WriterSharp
 			}
 
 			app.RequestedThemeVariant = theme == WriterSharpTheme.Light ? ThemeVariant.Light : ThemeVariant.Dark;
+
+		}
+		
+		/// <summary>
+		/// Auto-detects file extension and uses the matching default grammar.
+		/// </summary>
+		/// <param name="themeName">Theme for the syntax highlighting</param>
+		private void ApplyTextMateGrammar(ThemeName themeName = ThemeName.DarkPlus) // todo: add plugin support to this
+		{
+
+			registryOptions = new(themeName);
+			string? extension = Path.GetExtension(currentFile);
+			textMateInstallation = textEditor.InstallTextMate(registryOptions);
+			var textMateScope = registryOptions.GetScopeByExtension(
+				(extension is null || extension == String.Empty) ? ".txt" : extension
+			);
+
+			textMateInstallation.SetGrammar(textMateScope);
+
+		}
+
+		/// <summary>
+		/// Auto-detects file extension and uses the matching default grammar.
+		/// </summary>
+		/// <param name="colormapTheme">The colormap theme to use for syntax highlighting</param>
+		/// <param name="fallbackTheme">Fallback theme for the syntax highlighting</param>
+		private void ApplyTextMateGrammar(IRawTheme colormapTheme, ThemeName fallbackTheme = ThemeName.DarkPlus) // todo: add plugin support to this
+		{
+
+			registryOptions = new(fallbackTheme);
+			string? extension = Path.GetExtension(currentFile);
+			textMateInstallation = textEditor.InstallTextMate(registryOptions);
+			var textMateScope = registryOptions.GetScopeByExtension(
+				(extension is null || extension == String.Empty) ? ".txt" : extension
+			);
+
+			textMateInstallation.SetGrammar(textMateScope);
+			textMateInstallation.SetTheme(colormapTheme);
+
+		}
+
+		private void ApplyTextMateGrammar(string? grammarFile = null, ThemeName themeName = ThemeName.DarkPlus) // todo: add plugin support to this
+		{
+
+			registryOptions = new(themeName);
+			string? extension = Path.GetExtension(currentFile);
+			textMateInstallation = textEditor.InstallTextMate(registryOptions);
+			// todo: textMateInstallation.SetGrammarFile(grammarFile ?? !TODO!)
+
+		}
+
+		private void ApplyTextMateGrammar(IRawTheme colormapTheme, string? grammarFile = null, ThemeName fallbackTheme = ThemeName.DarkPlus) // todo: add plugin support to this
+		{
+
+			registryOptions = new(fallbackTheme);
+			string? extension = Path.GetExtension(currentFile);
+			textMateInstallation = textEditor.InstallTextMate(registryOptions);
+			// todo: textMateInstallation.SetGrammarFile(grammarFile ?? !TODO!)
+			textMateInstallation.SetTheme(colormapTheme);
 
 		}
 

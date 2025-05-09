@@ -13,7 +13,10 @@
 // System
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -66,63 +69,53 @@ namespace WriterSharp
 
 		}
 
-		public WriterSharpTranslation(string plugin, string englishName, string realName, string translationFile)
+		/// <summary>
+		/// Creates a WriterSharp GUI translation.
+		/// </summary>
+		/// <param name="plugin">The name of the plugin that manages this translation</param>
+		/// <param name="englishName">The English/universal name of the translation</param>
+		/// <param name="realName">The "real" name of the translation, in the same language as the translation</param>
+		/// <param name="translationFile">The translation file</param>
+		/// <param name="englishTranslation"></param>
+		public unsafe WriterSharpTranslation(string plugin, string englishName, string realName, string translationFile, in WriterSharpTranslation englishTranslation)
 		{
 
 			PluginName = plugin;
 			TranslationNames = [englishName, realName];
-			// todo: work on dis
+			string fileContents;
 
-		}
-
-	}
-
-	/// <summary>
-	/// Interface for syntax highlighting themes.
-	/// </summary>
-	public class SyntaxColormap
-	{
-
-		/// <summary>
-		/// The name of the plugin that manages this colormap.
-		/// </summary>
-		public string PluginName { get; set; }
-
-		/// <summary>
-		/// The mode this theme supports (use Auto for any).
-		/// </summary>
-		public WriterSharpTheme ThemeMode { get; set; }
-
-		/// <summary>
-		/// The actual colormap itself, as a dictionary.
-		/// </summary>
-		protected Dictionary<string, string>? Colormap { get; set; }
-
-		public SyntaxColormap(string plugin, WriterSharpTheme theme, string colormapFile)
-		{
-
-			PluginName = plugin;
-			ThemeMode = theme;
-			// todo: work on dis
-
-		}
-
-		/// <summary>
-		/// Assign or access a colormap key.
-		/// </summary>
-		/// <param name="key">The colormap entry to access/modify</param>
-		/// <returns><strong>(get)</strong> Returns the matching entry or null if none was found</returns>
-		/// <exception cref="ArgumentNullException">Cannot assign an entry to null</exception>
-		public string? this[string key]
-		{
-
-			get => Colormap?.GetValueOrDefault(key);
-			set
+			try
 			{
 
-				if (Colormap is null) return;
-				if (value is null) throw new ArgumentNullException(nameof(value), "Value to assign may not be null");
-				else Colormap.Add(key, value);
+				fileContents = File.ReadAllText(translationFile);
+
+			}
+			catch (FileNotFoundException)
+			{
+
+				Translation = null;
+				return;
+
+			}
+
+			var rootNode = JsonNode.Parse(fileContents, new(), new() { CommentHandling = JsonCommentHandling.Skip }); // pretends comments ain't there, nice
+
+			if (rootNode is not JsonObject jsonObject) { Translation = null; return; }
+			KeyValuePair<string, string> kvp;
+
+			Translation = [];
+
+			foreach (var pair in jsonObject)
+			{
+
+				if (pair.Value is not JsonValue jsonValue) { Translation = null; return; }
+
+				jsonValue.TryGetValue(out JsonElement jsonElement);
+
+				if (jsonElement.ValueKind != JsonValueKind.String) { Translation = null; return; }
+				kvp = KeyValuePair.Create(pair.Key, (jsonElement.GetString() ?? englishTranslation[pair.Key]) ?? pair.Key); // max safety: tries GetString, tries English, uses key
+
+				Translation.Add(kvp.Key, kvp.Value);
 
 			}
 
@@ -151,13 +144,12 @@ namespace WriterSharp
 		/// </summary>
 		public Grammar? Grammar { get; set; }
 
-		// todo
 		public Language(string plugin, string language, string grammarFile)
 		{
 
 			PluginName = plugin;
 			LanguageName = language;
-			// todo: work on dis
+			// todo: work on dis !URGENT!
 
 		}
 
@@ -175,11 +167,6 @@ namespace WriterSharp
 		/// Translations.
 		/// </summary>
 		WriterSharpTranslation[] translations;
-
-		/// <summary>
-		/// Colormaps.
-		/// </summary>
-		SyntaxColormap[] colormaps;
 
 	}
 
@@ -287,14 +274,57 @@ namespace WriterSharp
 
 		}
 
-		private static Task HandlePluginLanguages(XmlNodeList languages)
+		private static byte HandlePluginLanguages(XmlNodeList languages, string pluginName, string innerName, ref Dictionary<string, Language> languageKVP)
 		{
 
-			throw new NotImplementedException("TODO"); // todo
+			var enumerator = languages.GetEnumerator();
+
+			while (enumerator.MoveNext())
+			{
+
+				XmlNode language = (XmlNode)enumerator.Current;
+				string? filetypes = language.Attributes?["Filetypes"]?.Value;
+				string? filetype = language.Attributes?["Filetype"]?.Value;
+
+				if (filetypes is null && filetype is null) return 1; // does not quality as a language
+
+				// we don't care about the icon, it's irrelevant to us
+				string name = (language.Attributes?["Name"]?.Value)
+					?? ((filetypes ?? filetype)
+						?? "UNKNOWN")
+							.ToUpper();
+
+				string filePath = Path.Join
+				("Plugins", innerName, language.InnerText);
+
+				if (!File.Exists(filePath)) return 2; // grammar doesn't exist
+
+				if (filetypes is not null)
+				{
+
+					foreach (var allowedFiletype in filetypes.Split(';'))
+					{
+
+						languageKVP.Add($".{allowedFiletype}", new(pluginName, name, Path.GetFullPath(filePath)));
+
+					}
+
+				}
+				else
+				{
+
+					Debug.Assert(filetype is not null, "Unexpected null filetype."); // this will NEVER EVER run, but it pleases .NET sooo
+					languageKVP.Add($".{filetype}", new(pluginName, name, Path.GetFullPath(filePath)));
+
+				}
+
+			}
+
+			return 0;
 
 		}
 
-		public static void InterpretPluginXML(XmlDocument xmlDocument, out WriterSharpPlugin? plugin)
+		public unsafe static void InterpretPluginXML(XmlDocument xmlDocument, ref Dictionary<string, Language> languageKVP, out WriterSharpPlugin? plugin)
 		{
 
 			var root = xmlDocument.DocumentElement;
@@ -302,7 +332,6 @@ namespace WriterSharp
 
 			string? pluginInnerName = root.Attributes["InnerName"]?.Value;
 			if (pluginInnerName is null) { plugin = null; return; }
-			// todo: innername must be unique		
 
 			string pluginName = root.Attributes["Name"]?.Value ?? pluginInnerName;
 
@@ -332,9 +361,9 @@ namespace WriterSharp
 
 			// now, for the real deal
 			var languages = root.GetElementsByTagName("Language"); // get languages
-			HandlePluginLanguages(languages); // todo
+			HandlePluginLanguages(languages, pluginName, pluginInnerName, ref languageKVP);
 
-			plugin = null; // todo
+			plugin = null; // todo: add the rest
 
 		}
 

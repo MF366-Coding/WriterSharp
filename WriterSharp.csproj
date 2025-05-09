@@ -16,6 +16,8 @@
 		<FileVersion>1.0.1.0</FileVersion>
 		<InformationalVersion>1.0.0-alpha4</InformationalVersion>
 
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
 		<!-- UNCOMMENT FOR UNSTABLE RELEASES -->
 		<!-- SourceRevisisonId = @<DD><MM><YY><reviewer (6 letters)> -->
 		<SourceRevisionId>@280425mfmatt</SourceRevisionId>
