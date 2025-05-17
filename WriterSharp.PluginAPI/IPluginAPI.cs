@@ -1,4 +1,6 @@
-﻿using WriterSharp.PluginAPI.Keybindings;
+﻿using System;
+
+using WriterSharp.PluginAPI.Keybindings;
 using WriterSharp.PluginAPI.Tools;
 
 

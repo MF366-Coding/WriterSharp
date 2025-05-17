@@ -1,4 +1,7 @@
-﻿namespace WriterSharp.PluginAPI.Tools
+﻿using System;
+
+
+namespace WriterSharp.PluginAPI.Tools
 {
 
 	public interface ILogger
