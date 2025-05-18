@@ -1,0 +1,32 @@
+#+TITLE: WriterSharp Official Documentation
+#+AUTHOR: Matthew (MF366)
+
+* 👋 Welcome!
+This is the official documentation for WriterSharp, where you can find what you need: from examples to reference sheets.
+
+* 🔧 How to Build
+To build this documentation, simply run =WriterSharp.Docs.exe= or =WriterSharp.Docs=. Yea, it's *that* easy.
+
+If you wish to use *pandoc* instead of *Emacs*, you can also do this:
+
+#+begin_src bash
+>> WriterSharp.Docs.exe pandoc
+#+end_src
+
+You may also specify a custom format to conver to. The following formats are all supported.
+
+#+begin_src bash
+# for all these examples, you can use pandoc instead of emacs
+>> WriterSharp.Docs.exe emacs pdf # requires a LaTeX engine
+>> WriterSharp.Docs.exe emacs latex # same as pdf
+>> WriterSharp.Docs.exe emacs md # markdown
+>> WriterSharp.Docs.exe emacs mdown # same as md
+>> WriterSharp.Docs.exe emacs markdown # same as md
+>> WriterSharp.Docs.exe emacs html # default
+#+end_src
+
+If you don't wish to build all modules, but only a specific one, you may specify it:
+
+#+begin_src bash
+>> WriterSharp.Docs.exe emacs html ModuleName # you may use any format. you may also use pandoc instead
+#+end_src

@@ -1,55 +1,96 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
+
 using WriterSharp.PluginAPI;
 using WriterSharp.PluginAPI.Tools;
+using WriterSharp.Core.ErrorManagement;
 
 
 namespace WriterSharp.Core.PluginManagement
 {
 
-    public class PluginManager
-    {
+	public class PluginManager
+	{
 
-        private readonly List<IWriterSharpPlugin> loadedPlugins = new();
-        private readonly PluginEventBus pluginEventBus = new();
-        private readonly ILogger logger;
+		private readonly List<IWriterSharpPlugin> loadedPlugins = new();
+		// todo: private readonly PluginEventBus pluginEventBus = new();
+		private readonly ILogger logger;
 
-        public PluginManager(ILogger logger)
-        {
+		public PluginManager(ILogger logger)
+		{
 
-            this.logger = logger;
+			this.logger = logger;
 
-        }
+		}
 
-        public void LoadPlugins(string pluginFolder)
-        {
+		public void LoadPlugins(string pluginFolder)
+		{
 
-            foreach (var directory in Directory.GetDirectories(pluginFolder))
-            {
+			foreach (var directory in Directory.GetDirectories(pluginFolder))
+			{
 
-                if (directory is null) break; // we have no plugins to load
-                if (!IsDirectoryPlugin(directory)) continue; // silently skip this
+				if (directory is null) break; // we have no plugins to load
+				if (!IsDirectoryPlugin(directory)) continue; // silently skip this
 
-                LoadPlugin(directory);
+				LoadPlugin(directory);
 
-            }
+			}
 
-        }
+		}
 
-        private void LoadPlugin(string directory)
-        {
+		private void LoadPlugin(string directory)
+		{
 
-            // TODO: code this with black amgic
-            throw new NotImplementedException("FML");
+			// TODO: code this with black amgic
+			throw new NotImplementedException("FML");
 
-        }
+		}
 
 		private static bool IsDirectoryPlugin(string directory)
 		{
 
-            // TODO: code this with black amgic
-            return true;
+			string path = Path.Join(directory, "EntryPoint.Plugin.dll");
+
+			if (!File.Exists(path))
+				return false;
+
+			Assembly? assembly = null;
+
+			try
+			{
+
+				assembly = Assembly.LoadFrom(path);
+
+			}
+			catch (FileNotFoundException fEx)
+			{
+
+				ErrorCache.RegisterError(new PluginError(Path.GetDirectoryName(directory) ?? "NoPluginFound", 1, $"Could not find a WriterSharp plugin at {directory}.", fEx));
+				return false;
+
+			}
+			catch (FileLoadException flEx)
+			{
+
+				ErrorCache.RegisterError(new PluginError(Path.GetDirectoryName(directory) ?? "NoPluginFound", 2, $"Failed to load existing file at {path}.", flEx));
+
+			}
+
+			if (assembly is null)
+			{
+
+				// todo
+				return false;
+
+			}
+
+			var pluginType = assembly.GetTypes().ToList().
+				FirstOrDefault(t => typeof(IWriterSharpPlugin).IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
+
+			return true; // todo
 
 		}
 

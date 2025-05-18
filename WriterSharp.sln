@@ -27,6 +27,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriterSharp.Docs", "WriterSharp.Docs\WriterSharp.Docs.csproj", "{C7E830E5-C13C-4422-93D1-AAC63E275FD4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1A11CD8A-82A0-416C-A878-1CE55688AF0A} = {1A11CD8A-82A0-416C-A878-1CE55688AF0A}
+		{48C4BED8-F243-44DF-9D9E-4B6B1634B78C} = {48C4BED8-F243-44DF-9D9E-4B6B1634B78C}
+		{C9A5DF84-AE96-46FB-835B-68EF1FADA243} = {C9A5DF84-AE96-46FB-835B-68EF1FADA243}
+		{F6080CCB-33AA-40F5-B971-78743A49074D} = {F6080CCB-33AA-40F5-B971-78743A49074D}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +57,10 @@ Global
 		{C9A5DF84-AE96-46FB-835B-68EF1FADA243}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9A5DF84-AE96-46FB-835B-68EF1FADA243}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9A5DF84-AE96-46FB-835B-68EF1FADA243}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7E830E5-C13C-4422-93D1-AAC63E275FD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7E830E5-C13C-4422-93D1-AAC63E275FD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7E830E5-C13C-4422-93D1-AAC63E275FD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7E830E5-C13C-4422-93D1-AAC63E275FD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
