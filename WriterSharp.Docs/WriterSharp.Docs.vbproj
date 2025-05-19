@@ -2,12 +2,13 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
+		<RootNamespace>WriterSharp.Docs</RootNamespace>
 		<TargetFramework>net8.0</TargetFramework>
-		<Nullable>enable</Nullable>
 	</PropertyGroup>
-	
+
 	<ItemGroup>
 		<None Include="Documentation\**" CopyToOutputDirectory="PreserveNewest" Pack="true" />
+		<None Include="main.py" CopyToOutputDirectory="PreserveNewest" />
 	</ItemGroup>
 
 </Project>
