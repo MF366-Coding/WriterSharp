@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace WriterSharp.Core.ErrorManagement
@@ -37,6 +39,69 @@ namespace WriterSharp.Core.ErrorManagement
 		/// </summary>
 		/// <returns></returns>
 		public static bool HasCachedErrors() => errors.Count > 0;
+
+		/// <summary>
+		/// Rethrows the last exception of the list of cached exceptions.
+		/// Does not throw anything if there aren't any cached exceptions.
+		/// </summary>
+		public static void RethrowMostRecentException()
+		{
+
+			if (!HasCachedErrors()) return;
+			var lastError = errors.Last();
+
+			var exception = (lastError.Exception) ?? new Exception($"Rethrowing error - ICachableError({lastError.ErrorCode}, {lastError.Message})");
+
+			throw exception;
+
+		}
+
+		/// <summary>
+		/// Rethrows the last exception of the list of cached exceptions.
+		/// </summary>
+		/// <param name="alwaysThrow">When set to true, will throw an exception even if there are no cahced errors to rethrow</param>
+		/// <exception cref="Exception">Thrown when there are no cached errors (requires alwaysThrow to be true)</exception>
+		public static void RethrowMostRecentException(bool alwaysThrow)
+		{
+
+			if (!HasCachedErrors() && alwaysThrow)
+			{
+
+				throw new Exception("No cached errors to rethrow.");
+
+			}
+
+			else
+			{
+
+				RethrowMostRecentException();
+
+			}
+
+		}
+
+		/// <summary>
+		/// Rethrows the last exception of the list of cached exceptions.
+		/// </summary>
+		/// <param name="toThrowIfNone">Exception to throw when there are no cached errors to rethrow</param>
+		public static void RethrowMostRecentException(Exception toThrowIfNone)
+		{
+
+			if (!HasCachedErrors())
+			{
+
+				throw toThrowIfNone;
+
+			}
+
+			else
+			{
+
+				RethrowMostRecentException();
+
+			}
+
+		}
 
 		/// <summary>
 		/// Clears the error cache.

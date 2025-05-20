@@ -7,6 +7,7 @@ using System.Reflection;
 using WriterSharp.PluginAPI;
 using WriterSharp.PluginAPI.Tools;
 using WriterSharp.Core.ErrorManagement;
+using System.Security;
 
 
 namespace WriterSharp.Core.PluginManagement
@@ -68,16 +69,46 @@ namespace WriterSharp.Core.PluginManagement
 			catch (FileNotFoundException fEx)
 			{
 
-				ErrorCache.RegisterError(new PluginError(Path.GetDirectoryName(directory) ?? "NoPluginFound", 1, $"Could not find a WriterSharp plugin at {directory}.", fEx));
+				ErrorCache.RegisterError(new PluginError(Path.GetFileName(directory) ?? "NoPluginFound", 1, $"Could not find a WriterSharp plugin at {directory}.", fEx));
 				return false;
 
 			}
 			catch (FileLoadException flEx)
 			{
 
-				ErrorCache.RegisterError(new PluginError(Path.GetDirectoryName(directory) ?? "NoPluginFound", 2, $"Failed to load existing file at {path}.", flEx));
+				ErrorCache.RegisterError(new PluginError(Path.GetFileName(directory), 2, $"Failed to load existing file at {path}.", flEx));
+				return false;
 
 			}
+			catch (BadImageFormatException badIFEx)
+			{
+
+				ErrorCache.RegisterError(new PluginError(Path.GetFileName(directory), 2, $"Plugin at {path} is incompatible with the currently loaded assembly.", badIFEx));
+				return false;
+
+			}
+			catch (SecurityException secEx)
+			{
+
+				ErrorCache.RegisterError(new PluginError(Path.GetFileName(directory), 3, $"Missing the required WebPermission to be able to access plugin at {path}.", secEx));
+				return false;
+
+			}
+			catch (PathTooLongException ptlEx)
+			{
+
+				ErrorCache.RegisterError(new PluginError(Path.GetFileName(directory), 4, $"Path to plugin (ends with {path.AsSpan(path.Length - 20, 20)}) exceeds system-defined maximum in character count.", ptlEx));
+				return false;
+
+			}
+			catch (Exception ex)
+			{
+
+				ErrorCache.RegisterError(new PluginError(Path.GetFileName(directory), 5, $"Unknown error when loading plugin at {path}.", ex));
+				return false;
+
+			}
+
 
 			if (assembly is null)
 			{
