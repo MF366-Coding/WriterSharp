@@ -5,6 +5,11 @@
 	{
 
 		/// <summary>
+		/// Prefered plugin API version, if available.
+		/// </summary>
+		uint PreferedPluginAPIVersion { get; init; }
+
+		/// <summary>
 		/// Initializes the plugin.
 		/// </summary>
 		/// <param name="pluginAPI">The plugin API to use</param>
