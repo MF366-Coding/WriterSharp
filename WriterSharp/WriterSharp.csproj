@@ -24,7 +24,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\WriterSharp.Abstractions\WriterSharp.Abstractions.csproj" />
 	  <ProjectReference Include="..\WriterSharp.Core\WriterSharp.Core.csproj" />
-	  <ProjectReference Include="..\WriterSharp.PluginAPI\WriterSharp.PluginAPI.csproj" />
+	  <ProjectReference Include="..\WriterSharp.Plugins\WriterSharp.Plugins.csproj" />
 	</ItemGroup>
 </Project>

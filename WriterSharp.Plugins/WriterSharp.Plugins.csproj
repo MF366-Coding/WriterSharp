@@ -3,12 +3,11 @@
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
-		<OutputType>Library</OutputType>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\WriterSharp.Abstractions\WriterSharp.Abstractions.csproj" />
-	  <ProjectReference Include="..\WriterSharp.Plugins\WriterSharp.Plugins.csproj" />
 	</ItemGroup>
 
 </Project>
