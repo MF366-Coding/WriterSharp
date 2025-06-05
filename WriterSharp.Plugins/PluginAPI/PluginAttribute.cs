@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace WriterSharp.Plugins
+namespace WriterSharp.Plugins.PluginAPI
 {
 
 	/// <summary>

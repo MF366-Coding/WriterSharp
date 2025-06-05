@@ -16,7 +16,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\WriterSharp.Abstractions\WriterSharp.Abstractions.csproj" />
 	  <ProjectReference Include="..\WriterSharp.Core\WriterSharp.Core.csproj" />
 	  <ProjectReference Include="..\WriterSharp.Plugins\WriterSharp.Plugins.csproj" />
 	  <ProjectReference Include="..\WriterSharp\WriterSharp.csproj" />

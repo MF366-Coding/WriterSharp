@@ -4,6 +4,9 @@
 namespace WriterSharp.Core.ErrorManagement
 {
 
+	/// <summary>
+	/// Blueprint for a cachable error.
+	/// </summary>
 	public interface ICachableError
 	{
 

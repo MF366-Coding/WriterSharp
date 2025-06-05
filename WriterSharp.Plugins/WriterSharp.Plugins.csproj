@@ -6,8 +6,4 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 
-	<ItemGroup>
-	  <ProjectReference Include="..\WriterSharp.Abstractions\WriterSharp.Abstractions.csproj" />
-	</ItemGroup>
-
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace WriterSharp.Abstractions.Logger
+﻿namespace WriterSharp.Plugins.Logger
 {
 
 	/// <summary>

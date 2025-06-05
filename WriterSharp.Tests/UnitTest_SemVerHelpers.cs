@@ -65,7 +65,7 @@ namespace WriterSharp.Tests
 		{
 
 			var result = SemVerHelpers.IsVersionOlderOrEqual(candidateMajor, candidateMinor, candidatePatch, currentMajor, currentMinor, currentPatch);
-			Assert.Equal(result, expectedResult);
+			Assert.Equal(expectedResult, result);
 
 		}
 
