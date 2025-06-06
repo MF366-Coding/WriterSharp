@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.SqlTypes;
 
 
 namespace WriterSharp.Plugins

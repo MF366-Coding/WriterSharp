@@ -24,7 +24,22 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\WriterSharp.Core\WriterSharp.Core.csproj" />
-	  <ProjectReference Include="..\WriterSharp.Plugins\WriterSharp.Plugins.csproj" />
+		<None Include="..\README.md">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+
+		<None Include="..\LICENSE">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</None>
+
+		<Folder Include="..\Assets">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+			<Pack>true</Pack>
+		</Folder>
+	</ItemGroup>
+	
+	<ItemGroup>
+		<ProjectReference Include="..\WriterSharp.Core\WriterSharp.Core.csproj" />
+		<ProjectReference Include="..\WriterSharp.Plugins\WriterSharp.Plugins.csproj" />
 	</ItemGroup>
 </Project>

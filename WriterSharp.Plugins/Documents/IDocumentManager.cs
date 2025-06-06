@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 
 
-namespace WriterSharp.Plugins.DocumentManager
+namespace WriterSharp.Plugins.Documents
 {
 
 	/// <summary>
@@ -108,7 +108,7 @@ namespace WriterSharp.Plugins.DocumentManager
 		/// call the Save As dialog.
 		/// </summary>
 		/// <returns>A record containing action return data.</returns>
-		ReturnData SaveCurrentFileAsync();
+		Task<ReturnData> SaveCurrentFileAsync();
 
 		/// <summary>
 		/// Saves the current file, asynchronously, with the default properties but to a different path.<br />
@@ -117,7 +117,7 @@ namespace WriterSharp.Plugins.DocumentManager
 		/// </summary>
 		/// <param name="newFilepath">The filepath to save the file to</param>
 		/// <returns>A record containing action return data.</returns>
-		ReturnData SaveCurrentFileAsync(string newFilepath);
+		Task<ReturnData> SaveCurrentFileAsync(string newFilepath);
 
 		/// <summary>
 		/// Saves the current file, asynchronously, with a given encoding but to a different path.<br />
@@ -127,7 +127,7 @@ namespace WriterSharp.Plugins.DocumentManager
 		/// <param name="newFilepath">The filepath to save the file to</param>
 		/// <param name="encoding">The encoding to save the file with</param>
 		/// <returns>A record containing action return data.</returns>
-		ReturnData SaveCurrentFileAsync(string newFilepath, Encoding encoding);
+		Task<ReturnData> SaveCurrentFileAsync(string newFilepath, Encoding encoding);
 
 		/// <summary>
 		/// Closes the current file (creates a new one).
@@ -139,7 +139,7 @@ namespace WriterSharp.Plugins.DocumentManager
 		/// Closes the current file asynchronously (creates a new one).
 		/// </summary>
 		/// <returns>A record containing action return data.</returns>
-		ReturnData CloseCurrentFileAsync();
+		Task<ReturnData> CloseCurrentFileAsync();
 
 	}
 

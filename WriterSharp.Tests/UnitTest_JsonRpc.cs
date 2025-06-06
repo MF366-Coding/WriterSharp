@@ -1,6 +1,6 @@
 using System;
 
-using WriterSharp.Core.JSON_RPC;
+using WriterSharp.Core.JsonRpc;
 using WriterSharp.Plugins;
 
 

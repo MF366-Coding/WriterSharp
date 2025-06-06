@@ -11,7 +11,7 @@
 		/// The output path to the logger.
 		/// If null, uses <see cref="System.Console" />.
 		/// </summary>
-		string? OutputPath { get; init; }
+		public string? OutputPath { get; init; }
 
 		/// <summary>
 		/// Logs a timestamp to the logger.

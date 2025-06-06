@@ -1,6 +1,6 @@
 ﻿using System;
 
-using WriterSharp.Plugins.DocumentManager;
+using WriterSharp.Plugins.Documents;
 using WriterSharp.Plugins.Logger;
 
 

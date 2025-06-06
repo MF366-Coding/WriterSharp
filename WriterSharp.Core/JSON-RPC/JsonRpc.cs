@@ -7,7 +7,7 @@ using WriterSharp.Core.ErrorManagement;
 using WriterSharp.Plugins;
 
 
-namespace WriterSharp.Core.JSON_RPC
+namespace WriterSharp.Core.JsonRpc
 {
 
 	/// <summary>
@@ -102,6 +102,33 @@ namespace WriterSharp.Core.JSON_RPC
 
 			rootNode.Add("result", result);
 			return rootNode.AsReadOnly();
+
+		}
+
+		/// <summary>
+		/// Converts a JSON-RPC dictionary to a <see cref="ReturnData" /> record.
+		/// </summary>
+		/// <param name="jsonRpc">The dictionary to convert</param>
+		/// <returns>The return data.</returns>
+		public static ReturnData ToReturnData(ReadOnlyDictionary<string, JsonNode?> jsonRpc)
+		{
+
+			int? id = jsonRpc["id"]?.GetValue<int>();
+			bool? success = jsonRpc["result"]?["isSuccessful"]?.GetValue<bool>();
+			ushort? code = jsonRpc["result"]?["code"]?.GetValue<ushort>();
+			string? msg = jsonRpc["result"]?["message"]?.GetValue<string?>();
+			string? value = jsonRpc["result"]?["verboseValue"]?.GetValue<string?>();
+			string? info = jsonRpc["result"]?["additionalInformation"]?.GetValue<string?>();
+			Exception? exception = null;
+
+			if (jsonRpc["result"]?["innerException"] is not null)
+			{
+
+				exception = new(jsonRpc["result"]?["innerException"]?["message"]?.GetValue<string?>());
+
+			}
+
+			return new(id ?? 0, success ?? false, code ?? 1, msg, value, info, exception);
 
 		}
 
