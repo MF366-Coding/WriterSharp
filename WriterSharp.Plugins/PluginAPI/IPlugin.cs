@@ -33,6 +33,11 @@
 		string Description { get; set; }
 
 		/// <summary>
+		/// The plugin context.
+		/// </summary>
+		IPluginContext PluginContext { get; set; }
+
+		/// <summary>
 		/// Method that's ran on start.
 		/// </summary>
 		/// <param name="context">The plugin context.</param>

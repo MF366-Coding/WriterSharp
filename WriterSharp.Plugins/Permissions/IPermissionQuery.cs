@@ -41,16 +41,9 @@ namespace WriterSharp.Plugins.Permissions
 		ReadOnlyCollection<Intents> GetPluginIntents(IPlugin plugin);
 
 		/// <summary>
-		/// Removes intents from self.
-		/// </summary>
-		/// <param name="intent">The intents to remove. Use | when choosing multiple intents.</param>
-		/// <returns>Information about the operation.</returns>
-		ReturnData WithdrawIntents(Intents intent);
-
-		/// <summary>
 		/// Removes intents from a specific plugin.
 		/// </summary>
-		/// <param name="plugin">The plugin whose intents to remove</param>
+		/// <param name="plugin">The plugin whose intents to remove. Use | when choosing multiple.</param>
 		/// <param name="intent">The intents to remove</param>
 		/// <returns>Information about the operation.</returns>
 		ReturnData WithdrawIntents(IPlugin plugin, Intents intent);
