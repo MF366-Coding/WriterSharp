@@ -6,11 +6,31 @@
 		<BuiltInComInteropSupport>true</BuiltInComInteropSupport>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+		<Platforms>AnyCPU;x64;x86;ARM32;ARM64</Platforms>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DebugType>none</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+		<DebugType>none</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+		<DebugType>none</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM32'">
+		<DebugType>none</DebugType>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+		<DebugType>none</DebugType>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Folder Include="Models\" />
-		<AvaloniaResource Include="Assets\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -27,7 +47,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\WriterSharp.Core\WriterSharp.Core.csproj" />
-	  <ProjectReference Include="..\WriterSharp.PluginApi.0\WriterSharp.PluginApi.0.csproj" />
+		<AvaloniaResource Include="..\Assets\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\WriterSharp.Core\WriterSharp.Core.csproj" />
+		<ProjectReference Include="..\WriterSharp.PluginApi.V0\WriterSharp.PluginApi.V0.csproj" />
 	</ItemGroup>
 </Project>
