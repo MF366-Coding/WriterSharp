@@ -15,7 +15,7 @@ namespace WriterSharp.PluginApi.V0.Language
 		/// </summary>
 		/// <param name="language">The language</param>
 		/// <returns>A GUID that can be used to unregister this language later on</returns>
-		public Guid RegisterLanguage(
+		public Guid Register(
 			LanguageDefinition language
 		);
 
@@ -24,7 +24,7 @@ namespace WriterSharp.PluginApi.V0.Language
 		/// </summary>
 		/// <param name="id">The language ID</param>
 		/// <returns>The language</returns>
-		public LanguageDefinition GetLanguage(
+		public LanguageDefinition Get(
 			string id
 		);
 
@@ -51,7 +51,7 @@ namespace WriterSharp.PluginApi.V0.Language
 		/// </summary>
 		/// <param name="fileExtension">One of the language's extensions</param>
 		/// <returns>The language</returns>
-		public LanguageDefinition GetLanguageByExtension(
+		public LanguageDefinition GetByExtension(
 			string fileExtension
 		);
 
@@ -60,7 +60,7 @@ namespace WriterSharp.PluginApi.V0.Language
 		/// </summary>
 		/// <param name="grammar">One of the language's grammars</param>
 		/// <returns>The language</returns>
-		public LanguageDefinition GetLanguageByGrammar(
+		public LanguageDefinition GetByGrammar(
 			string grammar
 		);
 
@@ -69,7 +69,7 @@ namespace WriterSharp.PluginApi.V0.Language
 		/// </summary>
 		/// <param name="associatedGuid">The GUID that was given at creation</param>
 		/// <returns><c>true</c> if successful</returns>
-		public bool UnregisterLanguage(
+		public bool Unregister(
 			Guid associatedGuid
 		);
 

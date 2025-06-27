@@ -16,12 +16,12 @@ namespace WriterSharp.PluginApi.V0.Theming
 		public required string Name { get; set; }
 		
 		/// <summary>
-		/// The colors of the theme (UI).
+		/// The flavor (colors of the UI theme).
 		/// </summary>
-		public Dictionary<string, string> Colors { get; } = [];
+		public Dictionary<string, string> Flavor { get; } = [];
 
 		/// <summary>
-		/// The colors of the theme (syntax highlighting).
+		/// The actual theme itself (colors of the editor).
 		/// </summary>
 		public Dictionary<string, TextFormatting> TokenColors { get; } = [];
 
