@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriterSharp", "WriterSharp\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriterSharp.Core", "WriterSharp.Core\WriterSharp.Core.csproj", "{966994A5-B1F1-4D33-B1CB-85009A5E2663}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriterSharp.Tests", "WriterSharp.Tests\WriterSharp.Tests.csproj", "{839FAF5B-26E5-4385-9957-879C03656D7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriterSharp.PluginApi", "WriterSharp.PluginApi\WriterSharp.PluginApi.csproj", "{CFB39ACD-13F2-4648-8DCB-C0AF52D2BEF5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriterSharp.PluginApi.V0", "WriterSharp.PluginApi.V0\WriterSharp.PluginApi.V0.csproj", "{CFB39ACD-13F2-4648-8DCB-C0AF52D2BEF5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriterSharp.Tests", "WriterSharp.Tests\WriterSharp.Tests.csproj", "{839FAF5B-26E5-4385-9957-879C03656D7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -37,7 +37,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\WriterSharp.Core\WriterSharp.Core.csproj" />
 		<ProjectReference Include="..\WriterSharp\WriterSharp.csproj" />
-		<ProjectReference Include="..\WriterSharp.PluginApi.V0\WriterSharp.PluginApi.V0.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
