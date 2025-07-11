@@ -1,7 +1,7 @@
 # WriterSharp
 <img src="Assets/Logo.png" align="right" width="100" alt="Norb's WriterClassic Logo"/>
 
-So, what is WriterSharp?
+So, what is **WriterSharp**?
 
 Well, long time ago *(it was only 3 years)*, I created a Python program with a GUI called [**WriterClassic**](https://github.com/MF366-Coding/WriterClassic). It was a basic text editor that evolved into something special - at least for me.
 
