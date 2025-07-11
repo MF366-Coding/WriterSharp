@@ -36,7 +36,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\WriterSharp.Core\WriterSharp.Core.csproj" />
-		<ProjectReference Include="..\WriterSharp\WriterSharp.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

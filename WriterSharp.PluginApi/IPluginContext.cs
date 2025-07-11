@@ -1,8 +1,17 @@
 ﻿namespace WriterSharp.PluginApi
 {
 
-	public interface IPluginContextV1
+	/// <summary>
+	/// The plugin context.
+	/// </summary>
+	public interface IPluginContext
 	{
+
+		/// <summary>
+		/// The sharded, recommended way for plugins to access
+		/// files from disk.
+		/// </summary>
+		IFileSystem FileSystem { get; }
 
 		/// <summary>
 		/// Manages languages loaded into WriterSharp.
@@ -24,6 +33,11 @@
 		/// Manages keyboard gestures loaded into WriterSharp.
 		/// </summary>
 		IGestureManager Gestures { get; }
+
+		/// <summary>
+		/// Manages commands that the user can call.
+		/// </summary>
+		ICommandManager Commands { get; }
 
 		/// <summary>
 		/// Manages plugin's settings via WriterSharp (for security).
