@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 
 namespace WriterSharp.PluginApi.FileSystem
@@ -132,6 +133,22 @@ namespace WriterSharp.PluginApi.FileSystem
 		/// <param name="filepath">The path to the file</param>
 		/// <returns><c>true</c> if it can be locked</returns>
 		public bool IsLockable(string filepath);
+
+		#endregion
+
+		#region Stream
+
+		/// <inheritdoc cref="File.OpenRead(String)" />
+		public FileStream OpenRead(string filepath);
+
+		/// <inheritdoc cref="File.OpenWrite(String)" />
+		public FileStream OpenWrite(string filepath);
+
+		/// <inheritdoc cref="File.OpenText(String)" />
+		public FileStream OpenText(string filepath);
+
+		/// <inheritdoc cref="File.Open(String, FileMode, FileAccess, FileShare)" />
+		public FileStream Open(string filepath, FileMode mode, FileAccess access, FileShare share);
 
 		#endregion
 
