@@ -405,3 +405,7 @@ __Backups/*
 
 # Plans
 \![Pp]lanning/*
+
+# JetBrains
+.idea/
+/WriterSharp.sln.DotSettings
