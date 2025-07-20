@@ -14,9 +14,14 @@
 		public string AbsoluteFilepath { get; }
 
 		/// <summary>
-		/// The name of the file.
+		/// The name (without the extension) of the file.
 		/// </summary>
 		public string Name { get; }
+
+		/// <summary>
+		/// The extension (with the dot) of the file.
+		/// </summary>
+		public string Extension { get; }
 
 	}
 

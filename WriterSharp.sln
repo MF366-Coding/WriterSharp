@@ -11,6 +11,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriterSharp.Tests", "Writer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriterSharp", "WriterSharp\WriterSharp.csproj", "{2C08ED8C-BCD5-4660-93B1-CB5AA66897D8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{089100B1-113F-4E66-888A-E83F3999EAFD}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WriterSharp.Exceptions", "WriterSharp.Exceptions\WriterSharp.Exceptions.csproj", "{DFBA8B1C-4288-4120-8FE4-1443B52080AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +114,26 @@ Global
 		{2C08ED8C-BCD5-4660-93B1-CB5AA66897D8}.Release|x64.Build.0 = Release|Any CPU
 		{2C08ED8C-BCD5-4660-93B1-CB5AA66897D8}.Release|x86.ActiveCfg = Release|Any CPU
 		{2C08ED8C-BCD5-4660-93B1-CB5AA66897D8}.Release|x86.Build.0 = Release|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Debug|ARM32.ActiveCfg = Debug|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Debug|ARM32.Build.0 = Debug|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Debug|x64.Build.0 = Debug|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Debug|x86.Build.0 = Debug|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Release|ARM32.ActiveCfg = Release|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Release|ARM32.Build.0 = Release|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Release|ARM64.Build.0 = Release|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Release|x64.ActiveCfg = Release|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Release|x64.Build.0 = Release|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Release|x86.ActiveCfg = Release|Any CPU
+		{DFBA8B1C-4288-4120-8FE4-1443B52080AF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
