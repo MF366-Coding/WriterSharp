@@ -1,0 +1,339 @@
+/* Fonts and icons */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import "https://www.nerdfonts.com/assets/css/webfont.css";
+
+/* Light mode */
+:root {
+  --primary-color: #000044;
+  --primary-color-light: #000088;
+  --primary-color-lighter: #002fb7;
+  --bg-white: white;
+  --bg-light: #f8f8f8;
+  --bg-gray: #c5c5c5;
+  --bg-dark: #222222;
+  --text-dark: #333;
+  --text-medium: #666;
+  --warning-light: #ffeeba;
+  --warning-medium: #ffda6a;
+  --border-light: rgba(0, 0, 0, 0.05);
+  --sans-serif: "Inter", "Segoe UI", sans-serif, system;
+  --monospace: "JetBrains Mono", "Consolas", monospace, system;
+}
+
+/* Dark mode */
+:root.dark-mode {
+  --bg-white: #121212;
+}
+
+.dark-mode {
+  --bg-white: #121212;
+  --bg-light: #1e1e1e;
+  --bg-gray: #666;
+  --bg-dark: #000;
+  --text-dark: #e0e0e0;
+  --text-medium: #aaa;
+  --border-light: rgba(255, 255, 255, 0.1);
+  --primary-color: #89b4fa;
+  --primary-color-light: #7aa2f7;
+  --primary-color-lighter: #b4e0fe;
+  --warning-light: #5b4f1f;
+  --warning-medium: #91721c;
+}
+
+.dark-mode .hero {
+  filter: brightness(1.3) saturate(0.6) sepia(0.1);
+}
+
+.dark-mode .hero.alt-bg2 {
+  filter: brightness(1.1) saturate(0.6) sepia(0.1);
+}
+
+.dark-mode .hero.alt-bg3 {
+  filter: brightness(1.1) saturate(0.7);
+}
+
+.dark-mode .hero h1,
+.dark-mode .hero h2,
+.dark-mode .hero h3,
+.dark-mode .hero h4,
+.dark-mode .hero h5,
+.dark-mode .hero h6,
+.dark-mode .hero p,
+.dark-mode #timer {
+  color: var(--text-dark);
+}
+
+/* Basic HTML built-ins */
+html, body {
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-white);
+  font-family: var(--sans-serif);
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-light);
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  color: var(--text-dark);
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+a:visited {
+  text-decoration: none;
+  color: var(--primary-color-light);
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--primary-color-lighter)
+}
+
+button {
+  padding: 4px;
+  font-size: 1.2rem;
+  background-color: var(--primary-color);
+  color: var(--bg-white);
+  border: none;
+  border-radius: 8px;
+}
+
+button:hover {
+  background-color: var(--primary-color-light);
+}
+
+footer {
+  height: 60px;
+  background-color: var(--bg-light);
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+nav a {
+  margin-left: 16px;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+nav a:hover {
+  margin-left: 16px;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+nav a:visited {
+  margin-left: 16px;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+nav button {
+  margin-left: 16px;
+}
+
+main {
+  flex: 1;
+  max-width: 95vw;
+  margin: 40px auto;
+  padding: 0 20px;
+  justify-content: center;
+  background-color: var(--bg-white);
+}
+
+/* Custom classes and others */
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.hero h1,
+.hero h2,
+.hero h3,
+.hero h4,
+.hero h5,
+.hero h6,
+.hero p {
+  color: var(--bg-light);
+}
+
+.huge-title {
+  font-size: 4rem;
+  font-weight: 800;
+}
+
+.section-heading {
+  text-align: center;
+  font-weight: 700;
+  margin-top: 30px;
+}
+
+.hero {
+  background-image: url("../assets/img/herobg.png");
+  background-size: 100%;
+  color: var(--bg-white);
+  text-align: center;
+  padding: 40px 20px;
+  border-radius: 8px;
+}
+
+.hero.alt-bg2 {
+  background-image: url("../assets/img/herobg2.png");
+}
+
+.hero.alt-bg3 {
+  background-image: url("../assets/img/herobg3.png");
+}
+
+.hero.alt-bg4 {
+  background-image: url("../assets/img/herobg4.png");
+}
+
+#timer {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  color: var(--bg-light)
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.card {
+  flex: 1 1 20vw;
+  background-color: var(--bg-light);
+  padding: 20px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+#footer-copyright, .small-text {
+  color: var(--text-medium);
+  font-size: 0.875rem;
+}
+
+.placeholder .grid .card {
+  background-color: var(--bg-gray);
+}
+
+.under-construction {
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.8s ease-out;
+}
+
+.under-construction.scrolled-in {
+  background-color: var(--bg-gray);
+}
+
+.under-construction a {
+  pointer-events: none;
+  cursor: default;
+  color: var(--text-dark);
+  text-decoration: none;
+}
+
+.banner {
+  position: absolute;
+  top: 80px;
+  left: 50%;
+  width: calc(100% + 32px);
+  max-width: none;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: var(--warning-medium);
+  color: var(--text-dark);
+  font-weight: bold;
+  text-align: center;
+  transform: rotate(-2deg);
+  transition: left 0.8s ease-out;
+}
+
+.under-construction.scrolled-in .banner {
+  opacity: 1;
+  left: 0;
+}
+
+/* Responsive UI */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+  }
+
+  nav {
+    margin-top: 12px;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 8px 12px 0 0;
+  }
+
+  .huge-title {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  main {
+    padding: 0 16px;
+    margin: 20px auto;
+  }
+
+  .grid {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .card {
+    padding: 16px;
+  }
+
+  #timer {
+    font-size: 1.25rem;
+  }
+}
+
