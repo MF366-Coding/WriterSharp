@@ -405,3 +405,6 @@ __Backups/*
 # JetBrains
 .idea/
 /WriterSharp.sln.DotSettings
+
+# Premium devlogs
+/docs/devlogs/premium

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WriterSharp - Devlogs</title>
+        <link rel="stylesheet" href="../css/styles.css" />
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico">
+    </head>
+    <body>
+        <header>
+            <div class="title">WriterSharp - Devlogs</div>
+            <nav>
+                <a href="../index.html">Home</a>
+                <a href="#">Download</a>
+                <a href="#">Plugins</a>
+                <a href="index.html">Devlogs</a>
+                <a href="../about.html">About</a>
+                <button id="mode-toggle"><i class="nf nf-md-theme_light_dark"></i></button>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero alt-bg4">
+                <h1 class="huge-title">Devlog $(DEVLOGID)</h1>
+                <p><i class="nf nf-fa-book"></i> $(DEVLOGTITLE)</p>
+                <p><i class="nf nf-fa-clock"></i> $(DEVLOGDATE)</p>
+                <p class="devlog-tag"><i class="nf nf-fa-tag"></i> $(DEVLOGTAG1)</p>
+                <p class="devlog-tag"><i class="nf nf-fa-tag"></i> $(DEVLOGTAG2)</p>
+                <a href="index.html"><i class="nf nf-fa-arrow-left"></i> Go Back</a>
+            </section>
+
+            <section>
+                <div>
+                    <blockquote>
+                        <div class="quote">$(DEVLOGQUOTE)</div>
+                        <p class="small-text">- $(DEVLOGQUOTEAUTHOR)</p>
+                    </blockquote>
+    
+                    $(DEVLOG)
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p id="footer-copyright">
+                Copyright <i class="nf nf-fa-copyright"></i> 2025 MF366
+            </p>
+        </footer>
+
+        <script src="../js/dark-mode.js"></script>
+        <script src="../js/scroll-animation.js"></script>
+    </body>
+</html>
