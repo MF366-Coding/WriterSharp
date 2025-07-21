@@ -12,3 +12,10 @@ I ended up releasing 11 major versions for it and almost released v12.0.0, but I
 So, **WriterSharp** was born. WriterSharp (please don't write **Writer#** - it's cursed) is WriterClassic but in C#, with a more modern look and better cross-platform compatibility.
 
 I also made the decision of not dropping the WriterClassic logo for a new one, because **A) It was made by a friend** and **B) It's *classic* :)**. 
+
+## New Site
+WriterSharp now has a new site, on which you can find devlogs and other _cool_ WriterSharp-related content. Check it out at [https://mf366-coding.github.io/WriterSharp/](https://mf366-coding.github.io/WriterSharp/index.html)!
+
+> **Made by MF366 with :heart:**
+> 
+> Copyright (c) 2025 MF366
