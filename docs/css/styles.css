@@ -173,7 +173,7 @@ blockquote footer {
 }
 
 footer {
-  height: 60px;
+  height: 120px;
   background-color: var(--bg-light);
   border-top: 1px solid var(--border-light);
   display: flex;
