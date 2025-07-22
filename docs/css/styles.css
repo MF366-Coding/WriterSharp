@@ -16,16 +16,13 @@
   --text-medium: #666;
   --warning-light: #ffeeba;
   --warning-medium: #ffda6a;
+  --color-red: rgb(202, 1, 1);
   --border-light: rgba(0, 0, 0, 0.05);
   --sans-serif: "Inter", "Segoe UI", sans-serif, system;
   --monospace: "JetBrains Mono", "Consolas", monospace, system;
 }
 
-/* Dark mode */
-:root.dark-mode {
-  --bg-white: #121212;
-}
-
+/* Dark Mode */
 .dark-mode {
   --bg-white: #121212;
   --bg-light: #1e1e1e;
@@ -39,6 +36,7 @@
   --primary-color-lighter: #b4e0fe;
   --warning-light: #5b4f1f;
   --warning-medium: #91721c;
+  --color-red: rgb(255, 58, 58);
 }
 
 .dark-mode .hero {
@@ -237,6 +235,10 @@ main {
   -ms-user-select: none;
 }
 
+.heart-icon {
+  color: var(--color-red);
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -389,7 +391,22 @@ p.devlog-tag, .hero p a {
   background-color: var(--bg-gray);
 }
 
-.under-construction a {
+.under-construction a, a.disabled-link {
+  pointer-events: none;
+  cursor: default;
+  color: var(--text-dark);
+  background-color: var(--bg-gray);
+  text-decoration: none;
+}
+
+.under-construction a:hover, a:hover.disabled-link {
+  pointer-events: none;
+  cursor: default;
+  color: var(--text-dark);
+  text-decoration: none;
+}
+
+.under-construction a:visited, a:visited.disabled-link {
   pointer-events: none;
   cursor: default;
   color: var(--text-dark);

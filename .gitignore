@@ -408,3 +408,7 @@ __Backups/*
 
 # Premium devlogs
 /docs/devlogs/premium
+
+# VSCode
+.vscode/*
+!.vscode/tasks.json

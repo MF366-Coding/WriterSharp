@@ -14,7 +14,7 @@ from markdown import markdown
 
 
 # [*] Constants
-METADATA_LINES_NUM = 8
+METADATA_LINES_NUM = 9
 DATE_SEPARATOR = '-'
 DEFAULT_HERO_BACKGROUND: str = ''
 DATE_FORMAT = "%d/%m/%Y"
@@ -37,7 +37,8 @@ def _get_attributes(markdown_contents: str)-> dict[str, str | list[str]]:
         "quote": lines[4].rstrip(),
         "quote-author": lines[5].rstrip(),
         "main-tag": lines[6].rstrip(),
-        "alt-tag": lines[7].rstrip()
+        "alt-tag": lines[7].rstrip(),
+        "disabled-link": lines[8][0] # [i] 0 both enabled, 1 next dis, 2 prev dis, 3 both dis
     }
 
 
@@ -87,6 +88,35 @@ def convert_markdown_to_html(template: str, markdown_content: str) -> str:
     ).replace(
         "$(DEVLOG)", html
     )
+    
+    match int(attrs['disabled-link']):
+        case 0:
+            devlog = devlog.replace(
+                "$(DEVLOGPREV)", f'<a href="devlog{unique_id - 1}.html"><i class="nf nf-fa-arrow_left"></i> Previous Devlog</a>'
+            ).replace(
+                "$(DEVLOGNEXT)", f'<a href="devlog{unique_id + 1}.html"><i class="nf nf-fa-arrow_right"></i> Next Devlog</a>'
+            )
+        
+        case 1:
+            devlog = devlog.replace(
+                "$(DEVLOGPREV)", f'<a href="devlog{unique_id - 1}.html"><i class="nf nf-fa-arrow_left"></i> Previous Devlog</a>'
+            ).replace(
+                "$(DEVLOGNEXT)", "<!-- no next button -->"
+            )
+            
+        case 2:
+            devlog = devlog.replace(
+                "$(DEVLOGPREV)", "<!-- no previous button -->"
+            ).replace(
+                "$(DEVLOGNEXT)", f'<a href="devlog{unique_id + 1}.html"><i class="nf nf-fa-arrow_right"></i> Next Devlog</a>'
+            )
+            
+        case _:
+            devlog = devlog.replace(
+                "$(DEVLOGPREV)", "<!-- no previous button -->"
+            ).replace(
+                "$(DEVLOGNEXT)", "<!-- no next button -->"
+            )
     
     return devlog
 

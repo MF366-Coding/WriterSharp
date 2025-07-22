@@ -12,11 +12,11 @@
         <header>
             <div class="title">WriterSharp - Devlogs</div>
             <nav>
-                <a href="../index.html">Home</a>
-                <a href="#">Download</a>
-                <a href="#">Plugins</a>
-                <a href="index.html">Devlogs</a>
-                <a href="../about.html">About</a>
+                <a href="../index.html"><i class="nf nf-fa-home"></i></a>
+                <a href="#"><i class="nf nf-fa-download"></i></a>
+                <a href="#"><i class="nf nf-md-puzzle"></i></a>
+                <a href="index.html"><i class="nf nf-fa-book"></i></a>
+                <a href="../about.html"><i class="nf nf-md-information"></i></a>
                 <button id="mode-toggle"><i class="nf nf-md-theme_light_dark"></i></button>
             </nav>
         </header>
@@ -28,7 +28,11 @@
                 <p><i class="nf nf-fa-clock"></i> 21/07/2025</p>
                 <p class="devlog-tag"><i class="nf nf-fa-tag"></i> Announcement</p>
                 <p class="devlog-tag"><i class="nf nf-fa-tag"></i> First Devlog</p>
-                <p><a href="index.html"><i class="nf nf-fa-arrow_left"></i> Go Back</a></p>
+                <p>
+                    <!-- no previous button -->
+                    <a href="index.html"><i class="nf nf-fa-home"></i> Go Back</a>
+                    <a href="devlog2.html"><i class="nf nf-fa-arrow_right"></i> Next Devlog</a>
+                </p>
             </section>
 
             <section>
@@ -41,6 +45,8 @@
                     <p>Welcome to the very first WriterSharp devlog - now hosted in WriterSharp's brand new site.</p>
                     <p>Yep, that's right, everyone! I've officially moved from the <em>tiny little section on my main site</em> to a dedicated site just for WriterSharp. While still a work in progress - very much like the program itself - it allows me to connect, share updates and be transparent with those who are interested - or just curious - in WriterSharp's development and eventual release.</p>
                     
+                    <hr />
+
                     <h2>Plugin API Progress</h2>
                     <p>WriterSharp development this week has been quieter than usual, but progress is still happening behind the scenes.</p>
                     <p>Specifically, the <strong>plugin API</strong> has been a focus in development, as I'm focused on defining the structure and laying down the foundations. No actual implementation just yet, but having a clean, flexible and maintainable API design is crucial, in my opinion, given the fact it's one of WriterSharp's strengths and one of the aspects that sets it apart from other code editor whose APIs might feel more... confusing.</p>

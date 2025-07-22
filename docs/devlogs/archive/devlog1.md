@@ -6,10 +6,13 @@ The secret of getting ahead is getting started.
 Mark Twain
 Announcement
 First Devlog
+2 <- this means the previous button should not exist also only the first character from this line is read soo; a value of 3 means both buttons should be hidden
 
 Welcome to the very first WriterSharp devlog - now hosted in WriterSharp's brand new site.
 
 Yep, that's right, everyone! I've officially moved from the _tiny little section on my main site_ to a dedicated site just for WriterSharp. While still a work in progress - very much like the program itself - it allows me to connect, share updates and be transparent with those who are interested - or just curious - in WriterSharp's development and eventual release.
+
+---
 
 ## Plugin API Progress
 WriterSharp development this week has been quieter than usual, but progress is still happening behind the scenes.

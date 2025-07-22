@@ -12,11 +12,11 @@
         <header>
             <div class="title">WriterSharp - Devlogs</div>
             <nav>
-                <a href="../index.html">Home</a>
-                <a href="#">Download</a>
-                <a href="#">Plugins</a>
-                <a href="index.html">Devlogs</a>
-                <a href="../about.html">About</a>
+                <a href="../index.html"><i class="nf nf-fa-home"></i></a>
+                <a href="#"><i class="nf nf-fa-download"></i></a>
+                <a href="#"><i class="nf nf-md-puzzle"></i></a>
+                <a href="index.html"><i class="nf nf-fa-book"></i></a>
+                <a href="../about.html"><i class="nf nf-md-information"></i></a>
                 <button id="mode-toggle"><i class="nf nf-md-theme_light_dark"></i></button>
             </nav>
         </header>
@@ -28,17 +28,22 @@
                 <p><i class="nf nf-fa-clock"></i> $(DEVLOGDATE)</p>
                 <p class="devlog-tag"><i class="nf nf-fa-tag"></i> $(DEVLOGTAG1)</p>
                 <p class="devlog-tag"><i class="nf nf-fa-tag"></i> $(DEVLOGTAG2)</p>
-                <a href="index.html"><i class="nf nf-fa-arrow-left"></i> Go Back</a>
+                <p>
+                    $(DEVLOGPREV)
+                    <a href="index.html"><i class="nf nf-fa-home"></i> Go Back</a>
+                    $(DEVLOGNEXT)
+                </p>
             </section>
 
             <section>
-                <div>
+                <div class="text-container">
                     <blockquote>
                         <div class="quote">$(DEVLOGQUOTE)</div>
                         <p class="small-text">- $(DEVLOGQUOTEAUTHOR)</p>
                     </blockquote>
     
                     $(DEVLOG)
+
                 </div>
             </section>
         </main>
