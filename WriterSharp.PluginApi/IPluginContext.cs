@@ -1,4 +1,8 @@
-﻿namespace WriterSharp.PluginApi
+﻿using WriterSharp.PluginApi.FileSystem;
+using WriterSharp.PluginApi.Settings;
+
+
+namespace WriterSharp.PluginApi
 {
 
 	/// <summary>
