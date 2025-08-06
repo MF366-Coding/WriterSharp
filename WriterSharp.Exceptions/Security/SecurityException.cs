@@ -13,7 +13,7 @@ namespace WriterSharp.Exceptions.Security
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SecurityException" /> class.
 		/// </summary>
-		public SecurityException() : base() { }
+		public SecurityException() { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="SecurityException" />

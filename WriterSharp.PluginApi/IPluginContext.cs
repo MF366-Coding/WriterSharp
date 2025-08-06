@@ -1,4 +1,6 @@
-﻿using WriterSharp.PluginApi.FileSystem;
+﻿using WriterSharp.PluginApi.DependencyInjection;
+using WriterSharp.PluginApi.FileSystem;
+using WriterSharp.PluginApi.Resources;
 using WriterSharp.PluginApi.Settings;
 
 
@@ -10,6 +12,13 @@ namespace WriterSharp.PluginApi
 	/// </summary>
 	public interface IPluginContext
 	{
+
+		// todo: add missing interfaces
+
+		/// <summary>
+		/// The WriterSharp resource manager, for communication between plugins.
+		/// </summary>
+		IResourceManager Resources { get; }
 
 		/// <summary>
 		/// The sharded, recommended way for plugins to access
@@ -47,6 +56,11 @@ namespace WriterSharp.PluginApi
 		/// Manages plugin's settings via WriterSharp (for security).
 		/// </summary>
 		ISettingsManager Settings { get; }
+
+		/// <summary>
+		/// Dependency injector for WriterSharp plugins.
+		/// </summary>
+		IDependencyInjector Dependencies { get; }
 
 	}
 

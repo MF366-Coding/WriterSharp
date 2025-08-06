@@ -13,7 +13,7 @@ namespace WriterSharp.Exceptions.IO
 		/// <summary>
 		/// Initializes a new instance of the <see cref="WriterSharpIOException" /> class.
 		/// </summary>
-		public WriterSharpIOException() : base() { }
+		public WriterSharpIOException() { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="WriterSharpIOException" />

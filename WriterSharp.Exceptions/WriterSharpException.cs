@@ -13,7 +13,7 @@ namespace WriterSharp.Exceptions
 		/// <summary>
 		/// Initializes a new instance of the <see cref="WriterSharpException" /> class.
 		/// </summary>
-		public WriterSharpException() : base() { }
+		public WriterSharpException() { }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="WriterSharpException" />

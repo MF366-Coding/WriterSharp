@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,21 +18,21 @@ namespace WriterSharp.PluginApi.FileSystem
 		/// </summary>
 		/// <param name="filepath">The path to the file</param>
 		/// <returns>The contents of the file</returns>
-		public Task<string> ReadAllTextAsync(string filepath, CancellationToken cancellationToken = default);
+		Task<string> ReadAllTextAsync(string filepath);
 
 		/// <summary>
 		/// Reads all text from a file, as a list of lines.
 		/// </summary>
 		/// <param name="filepath">The path to the file</param>
 		/// <returns>The contents of the file</returns>
-		public Task<string[]> ReadAllLinesAsync(string filepath, CancellationToken cancellationToken = default);
+		Task<string[]> ReadAllLinesAsync(string filepath);
 
 		/// <summary>
 		/// Reads the very first line of a file.
 		/// </summary>
 		/// <param name="filepath">The path to the file</param>
 		/// <returns>The first line of the file</returns>
-		public Task<string> ReadLineAsync(string filepath, CancellationToken cancellationToken = default);
+		Task<string> ReadLineAsync(string filepath);
 
 		/// <summary>
 		/// Reads a specific amount of characters from a file buffer.
@@ -42,7 +41,7 @@ namespace WriterSharp.PluginApi.FileSystem
 		/// <param name="amount">The amount of characters to read</param>
 		/// <param name="offset">The index from which to start reading the characters</param>
 		/// <returns>A span of characters</returns>
-		public Task<nint> ReadCharactersAsync(string filepath, ulong amount, long offset = 0, CancellationToken cancellationToken = default);
+		Task<nint> ReadCharactersAsync(string filepath, ulong amount, long offset = 0);
 
 		/// <summary>
 		/// Writes text to a file, creating it if necessary. If the file exists,
@@ -50,7 +49,7 @@ namespace WriterSharp.PluginApi.FileSystem
 		/// </summary>
 		/// <param name="filepath">The path to the file</param>
 		/// <param name="data">The text to write</param>
-		public Task WriteAllTextAsync(string filepath, string data, CancellationToken cancellationToken = default);
+		Task WriteAllTextAsync(string filepath, string data);
 
 		/// <summary>
 		/// Writes lines of text to a file, creating it if necessary.
@@ -58,21 +57,21 @@ namespace WriterSharp.PluginApi.FileSystem
 		/// </summary>
 		/// <param name="filepath">The path to the file</param>
 		/// <param name="data">The lines of text to write</param>
-		public Task WriteAllLinesAsync(string filepath, string[] data, CancellationToken cancellationToken = default);
+		Task WriteAllLinesAsync(string filepath, string[] data);
 
 		/// <summary>
 		/// Appends all the text to the end of a file.
 		/// </summary>
 		/// <param name="filepath">The path to the file</param>
 		/// <param name="data">The text to append</param>
-		public Task AppendAllTextAsync(string filepath, string data, CancellationToken cancellationToken = default);
+		Task AppendAllTextAsync(string filepath, string data);
 
 		/// <summary>
 		/// Appends all the specified lines of text to the end of a file.
 		/// </summary>
 		/// <param name="filepath">The path to the file</param>
 		/// <param name="data">The lines to append</param>
-		public Task AppendAllLinesAsync(string filepath, string[] data, CancellationToken cancellationToken = default);
+		Task AppendAllLinesAsync(string filepath, string[] data);
 
 		/// <summary>
 		/// Checks if a file is in use by another plugin.
@@ -81,19 +80,19 @@ namespace WriterSharp.PluginApi.FileSystem
 		/// </summary>
 		/// <param name="filepath">The path to the file</param>
 		/// <returns><c>true</c> if in use by another plugin</returns>
-		public bool InUse(string filepath);
+		bool InUse(string filepath);
 
 		/// <summary>
 		/// Locks a file, to prevent it from being accessed by other plugins.
 		/// </summary>
 		/// <param name="filepath">The path to the file to lock</param>
-		public Task LockAsync(string filepath, CancellationToken cancellationToken = default);
+		Task LockAsync(string filepath);
 
 		/// <summary>
 		/// Unlocks a previously locked file.
 		/// </summary>
 		/// <param name="filepath">The path to the file</param>
-		public Task UnlockAsync(string filepath, CancellationToken cancellationToken = default);
+		Task UnlockAsync(string filepath);
 
 		/// <summary>
 		/// Checks if a file is locked.
@@ -101,14 +100,14 @@ namespace WriterSharp.PluginApi.FileSystem
 		/// <param name="filepath">The path to the file</param>
 		/// <param name="lockOwnerIsCaller"><c>true</c> if the caller is the owner of the lock placed on this file</param>
 		/// <returns><c>true</c> if the file is locked, no matter who owns the lock</returns>
-		public bool IsLocked(string filepath, out bool lockOwnerIsCaller);
+		bool IsLocked(string filepath, out bool lockOwnerIsCaller);
 
 		/// <summary>
 		/// Checks if a file is locked by the caller.
 		/// </summary>
 		/// <param name="filepath">The path to the file</param>
 		/// <returns><c>true</c> if the file is locked and the lock owner is the caller</returns>
-		public bool IsLockedByMe(string filepath) => IsLocked(filepath, out var byMe) && byMe;
+		bool IsLockedByMe(string filepath);
 
 		/// <summary>
 		/// Checks if a file is considered "lockable" (allows locking)
@@ -116,24 +115,123 @@ namespace WriterSharp.PluginApi.FileSystem
 		/// </summary>
 		/// <param name="filepath">The path to the file</param>
 		/// <returns><c>true</c> if it can be locked</returns>
-		public bool IsLockable(string filepath);
+		bool IsLockable(string filepath);
 
-		/// <inheritdoc cref="System.IO.File.OpenRead(String)" />
-		public Task<FileStream> OpenReadAsync(string filepath, CancellationToken cancellationToken = default);
+		/// <inheritdoc cref="System.IO.File.OpenRead(string)" />
+		Task<FileStream> OpenReadAsync(string filepath);
 
-		/// <inheritdoc cref="System.IO.File.OpenWrite(String)" />
-		public Task<FileStream> OpenWriteAsync(string filepath, CancellationToken cancellationToken = default);
+		/// <inheritdoc cref="System.IO.File.OpenWrite(string)" />
+		Task<FileStream> OpenWriteAsync(string filepath);
 
-		/// <inheritdoc cref="System.IO.File.OpenText(String)" />
-		public Task<FileStream> OpenTextAsync(string filepath, CancellationToken cancellationToken = default);
+		/// <inheritdoc cref="System.IO.File.OpenText(string)" />
+		Task<FileStream> OpenTextAsync(string filepath);
 
-		/// <inheritdoc cref="System.IO.File.Open(String, FileMode, FileAccess, FileShare)" />
-		public Task<FileStream> OpenAsync(
+		/// <inheritdoc cref="System.IO.File.Open(string, FileMode, FileAccess, FileShare)" />
+		Task<FileStream> OpenAsync(
+			string filepath,
+			FileMode mode,
+			FileAccess access,
+			FileShare share
+		);
+
+		/// <summary>
+		/// Reads all text from a file.
+		/// </summary>
+		/// <param name="filepath">The path to the file</param>
+		/// <param name="cancellationToken">The cancellation token to trace</param>
+		/// <returns>The contents of the file</returns>
+		Task<string> ReadAllTextAsync(string filepath, CancellationToken cancellationToken);
+
+		/// <summary>
+		/// Reads all text from a file, as a list of lines.
+		/// </summary>
+		/// <param name="filepath">The path to the file</param>
+		/// <param name="cancellationToken">The cancellation token to trace</param>
+		/// <returns>The contents of the file</returns>
+		Task<string[]> ReadAllLinesAsync(string filepath, CancellationToken cancellationToken);
+
+		/// <summary>
+		/// Reads the very first line of a file.
+		/// </summary>
+		/// <param name="filepath">The path to the file</param>
+		/// <param name="cancellationToken">The cancellation token to trace</param>
+		/// <returns>The first line of the file</returns>
+		Task<string> ReadLineAsync(string filepath, CancellationToken cancellationToken);
+
+		/// <summary>
+		/// Reads a specific amount of characters from a file buffer.
+		/// </summary>
+		/// <param name="filepath">The path to the file</param>
+		/// <param name="amount">The amount of characters to read</param>
+		/// <param name="offset">The index from which to start reading the characters</param>
+		/// <param name="cancellationToken">The cancellation token to trace</param>
+		/// <returns>A span of characters</returns>
+		Task<nint> ReadCharactersAsync(string filepath, ulong amount, long offset, CancellationToken cancellationToken);
+
+		/// <summary>
+		/// Writes text to a file, creating it if necessary. If the file exists,
+		/// it will be overwritten.
+		/// </summary>
+		/// <param name="filepath">The path to the file</param>
+		/// <param name="data">The text to write</param>
+		/// <param name="cancellationToken">The cancellation token to trace</param>
+		Task WriteAllTextAsync(string filepath, string data, CancellationToken cancellationToken);
+
+		/// <summary>
+		/// Writes lines of text to a file, creating it if necessary.
+		/// If the file exists, it will be overwritten.
+		/// </summary>
+		/// <param name="filepath">The path to the file</param>
+		/// <param name="data">The lines of text to write</param>
+		/// <param name="cancellationToken">The cancellation token to trace</param>
+		Task WriteAllLinesAsync(string filepath, string[] data, CancellationToken cancellationToken);
+
+		/// <summary>
+		/// Appends all the text to the end of a file.
+		/// </summary>
+		/// <param name="filepath">The path to the file</param>
+		/// <param name="data">The text to append</param>
+		/// <param name="cancellationToken">The cancellation token to trace</param>
+		Task AppendAllTextAsync(string filepath, string data, CancellationToken cancellationToken);
+
+		/// <summary>
+		/// Appends all the specified lines of text to the end of a file.
+		/// </summary>
+		/// <param name="filepath">The path to the file</param>
+		/// <param name="data">The lines to append</param>
+		/// <param name="cancellationToken">The cancellation token to trace</param>
+		Task AppendAllLinesAsync(string filepath, string[] data, CancellationToken cancellationToken);
+
+		/// <summary>
+		/// Locks a file, to prevent it from being accessed by other plugins.
+		/// </summary>
+		/// <param name="filepath">The path to the file to lock</param>
+		/// <param name="cancellationToken">The cancellation token to trace</param>
+		Task LockAsync(string filepath, CancellationToken cancellationToken);
+
+		/// <summary>
+		/// Unlocks a previously locked file.
+		/// </summary>
+		/// <param name="filepath">The path to the file</param>
+		/// <param name="cancellationToken">The cancellation token to trace</param>
+		Task UnlockAsync(string filepath, CancellationToken cancellationToken);
+
+		/// <inheritdoc cref="System.IO.File.OpenRead(string)" />
+		Task<FileStream> OpenReadAsync(string filepath, CancellationToken cancellationToken);
+
+		/// <inheritdoc cref="System.IO.File.OpenWrite(string)" />
+		Task<FileStream> OpenWriteAsync(string filepath, CancellationToken cancellationToken);
+
+		/// <inheritdoc cref="System.IO.File.OpenText(string)" />
+		Task<FileStream> OpenTextAsync(string filepath, CancellationToken cancellationToken);
+
+		/// <inheritdoc cref="System.IO.File.Open(string, FileMode, FileAccess, FileShare)" />
+		Task<FileStream> OpenAsync(
 			string filepath,
 			FileMode mode,
 			FileAccess access,
 			FileShare share,
-			CancellationToken cancellationToken = default
+			CancellationToken cancellationToken
 		);
 
 	}
