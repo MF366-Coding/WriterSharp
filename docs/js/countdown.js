@@ -1,7 +1,7 @@
 /* Page Countdown */
 document.addEventListener('DOMContentLoaded', () => {
   const timer = document.getElementById('timer');
-  const releaseDate = new Date('2026-06-12T00:00:00'); // target date right here bud
+  const releaseDate = new Date('2026-12-31T00:00:00'); // target date right here bud
 
   function updateCountdown() {
     const now = new Date(); // new Date("wtf")

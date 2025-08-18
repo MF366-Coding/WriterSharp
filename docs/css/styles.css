@@ -99,6 +99,7 @@ header {
 
 h1, h2, h3, h4, h5, h6, p {
 	color: var(--text-dark);
+	flex-basis: 100%;
 }
 
 a {
@@ -233,6 +234,15 @@ main {
 }
 
 /* Custom classes and others */
+img.hover-hue-img {
+	filter: hue-rotate(100deg) blur(5px) brightness(0.5);
+	transition: filter 0.8s ease-in-out;
+}
+
+img.hover-hue-img:hover {
+	filter: hue-rotate(0deg) blur(0px) brightness(1);
+}
+
 .no-select {
 	user-select: none;
 	-webkit-user-select: none;
@@ -349,8 +359,16 @@ main {
 	-ms-user-select: none;
 }
 
-.card h2 {
+.card h1, .card h2, .card h3, .card h4, .card h5, .card h6 {
 	margin-top: 0;
+}
+
+.card.full-img-card {
+	padding: 0;
+}
+
+.card.full-img-card img {
+	border-radius: 8px;
 }
 
 #footer-copyright, .small-text {
@@ -429,7 +447,7 @@ p.devlog-tag, .hero p a {
 .banner {
 	position: absolute;
 	top: 20px;
-	left: 50%;
+	left: 100%;
 	width: calc(100% + 32px);
 	max-width: none;
 	padding-top: 20px;
