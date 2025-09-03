@@ -10,7 +10,7 @@
 		/// <summary>
 		/// Whether the service is available for public usage.
 		/// </summary>
-		bool IsAvailable { get; }
+		bool IsAvailable { get; set; }
 
 	}
 

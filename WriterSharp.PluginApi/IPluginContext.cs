@@ -1,7 +1,7 @@
-﻿using WriterSharp.PluginApi.DependencyInjection;
-using WriterSharp.PluginApi.FileSystem;
-using WriterSharp.PluginApi.Resources;
+﻿using WriterSharp.PluginApi.Diagnostics;
+using WriterSharp.PluginApi.IO;
 using WriterSharp.PluginApi.Settings;
+using WriterSharp.PluginApi.Sharing;
 
 
 namespace WriterSharp.PluginApi
@@ -13,12 +13,20 @@ namespace WriterSharp.PluginApi
 	public interface IPluginContext
 	{
 
-		// todo: add missing interfaces
+		/// <summary>
+		/// Manages commands that the user can call.
+		/// </summary>
+		ICommandManager Commands { get; }
 
 		/// <summary>
-		/// The WriterSharp resource manager, for communication between plugins.
+		/// Dependency container for WriterSharp.
 		/// </summary>
-		IResourceManager Resources { get; }
+		IDependencyContainer Dependencies { get; }
+
+		/// <summary>
+		/// Manages events related to WriterSharp.
+		/// </summary>
+		IEventManager Events { get; }
 
 		/// <summary>
 		/// The sharded, recommended way for plugins to access
@@ -27,9 +35,34 @@ namespace WriterSharp.PluginApi
 		IFileSystem FileSystem { get; }
 
 		/// <summary>
+		/// Manages keyboard gestures loaded into WriterSharp.
+		/// </summary>
+		IGestureManager Gestures { get; }
+
+		/// <summary>
+		/// Reporter for issues, such as performance issues.
+		/// </summary>
+		IPluginReporter IssueReporter { get; }
+
+		/// <summary>
 		/// Manages languages loaded into WriterSharp.
 		/// </summary>
 		ILanguageManager Languages { get; }
+
+		/// <summary>
+		/// The WriterSharp logger.
+		/// </summary>
+		ILogger Logger { get; }
+
+		/// <summary>
+		/// The WriterSharp resource manager, for communication between plugins.
+		/// </summary>
+		IResourceManager Resources { get; }
+
+		/// <summary>
+		/// Manages plugin's settings via WriterSharp (for security).
+		/// </summary>
+		ISettingsManager Settings { get; }
 
 		/// <summary>
 		/// Manages theming functionality loaded into
@@ -38,29 +71,9 @@ namespace WriterSharp.PluginApi
 		IThemingManager Themes { get; }
 
 		/// <summary>
-		/// Manages events related to WriterSharp.
+		/// Disables the plugin.
 		/// </summary>
-		IEventManager Events { get; }
-
-		/// <summary>
-		/// Manages keyboard gestures loaded into WriterSharp.
-		/// </summary>
-		IGestureManager Gestures { get; }
-
-		/// <summary>
-		/// Manages commands that the user can call.
-		/// </summary>
-		ICommandManager Commands { get; }
-
-		/// <summary>
-		/// Manages plugin's settings via WriterSharp (for security).
-		/// </summary>
-		ISettingsManager Settings { get; }
-
-		/// <summary>
-		/// Dependency injector for WriterSharp plugins.
-		/// </summary>
-		IDependencyInjector Dependencies { get; }
+		void Disable();
 
 	}
 

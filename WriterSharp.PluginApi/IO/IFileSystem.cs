@@ -3,7 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 
 
-namespace WriterSharp.PluginApi.System
+namespace WriterSharp.PluginApi.IO
 {
 
 	/// <summary>
