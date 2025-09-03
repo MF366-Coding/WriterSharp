@@ -1,11 +1,24 @@
-﻿namespace WriterSharp.PluginApi
+﻿using WriterSharp.PluginApi.Sharing;
+
+
+namespace WriterSharp.PluginApi
 {
 
 	/// <summary>
 	/// Represents a plugin to extend WriterSharp's functionalities.
 	/// </summary>
-	public interface IWriterSharpPlugin
+	public interface IWriterSharpPlugin : IService
 	{
+
+		/// <summary>
+		/// The author of the plugin.
+		/// </summary>
+		string Author { get; init; }
+
+		/// <summary>
+		/// A brief description of the plugin.
+		/// </summary>
+		string Description { get; init; }
 
 		/// <summary>
 		/// A unique ID for the plugin.
@@ -17,16 +30,6 @@
 		/// The name of the plugin.
 		/// </summary>
 		string Name { get; init; }
-
-		/// <summary>
-		/// A brief description of the plugin.
-		/// </summary>
-		string Description { get; init; }
-
-		/// <summary>
-		/// The author of the plugin.
-		/// </summary>
-		string Author { get; init; }
 
 		/// <summary>
 		/// The current version of the plugin.

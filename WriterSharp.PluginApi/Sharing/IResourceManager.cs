@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 
 
-namespace WriterSharp.PluginApi.Resources
+namespace WriterSharp.PluginApi.Sharing
 {
 
 	/// <summary>
-	/// A resource manager for sharability purposes.
+	/// A resource manager for shareability purposes.
 	/// </summary>
 	public interface IResourceManager
 	{
