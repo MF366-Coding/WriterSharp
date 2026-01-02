@@ -3,8 +3,7 @@
 
 So, what is **WriterSharp**?
 
-Well, long time ago *(it was only 3 years)*, I created a Python program with a GUI called [**WriterClassic
-**](https://github.com/matty-the-dev/WriterSharp). It was a basic text editor that evolved into something special - at
+Well, long time ago *(it was only 3 years)*, I created a Python program with a GUI called [**WriterClassic**](https://github.com/matty-the-dev/WriterSharp). It was a basic text editor that evolved into something special - at
 least for me.
 
 It was my biggest project for quite a while and it was also... my first actual programming project. I mean, public at
