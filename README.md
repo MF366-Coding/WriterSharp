@@ -20,7 +20,7 @@ and **B) It's *classic* :)**.
 
 ## New Site
 WriterSharp now has a new site, on which you can find devlogs and other _cool_ WriterSharp-related content. Check it out
-at [https://mf366-coding.github.io/WriterSharp/](https://mf366-coding.github.io/WriterSharp/index.html)!
+at [https://matty-the-dev.github.io/WriterSharp/](https://matty-the-dev.github.io/WriterSharp/index.html)!
 
 > **Made by Matthew with :heart:**
 >
