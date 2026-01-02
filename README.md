@@ -4,7 +4,7 @@
 So, what is **WriterSharp**?
 
 Well, long time ago *(it was only 3 years)*, I created a Python program with a GUI called [**WriterClassic
-**](https://github.com/MF366-Coding/WriterClassic). It was a basic text editor that evolved into something special - at
+**](https://github.com/matty-the-dev/WriterSharp). It was a basic text editor that evolved into something special - at
 least for me.
 
 It was my biggest project for quite a while and it was also... my first actual programming project. I mean, public at
@@ -23,6 +23,6 @@ and **B) It's *classic* :)**.
 WriterSharp now has a new site, on which you can find devlogs and other _cool_ WriterSharp-related content. Check it out
 at [https://mf366-coding.github.io/WriterSharp/](https://mf366-coding.github.io/WriterSharp/index.html)!
 
-> **Made by MF366 with :heart:**
+> **Made by Matthew with :heart:**
 >
-> Copyright (c) 2025 MF366
+> Copyright (c) 2025 Matthew
