@@ -30,7 +30,7 @@ If you wish to go further, join my **membership tiers**! Monthly or yearly suppo
 Ah, Discord... Right now, WriterSharp does not have its own Discord server and honestly, it'll _probably_ never have one. Instead, when [OceanApocalypseStudios](https://oceanapocalypsestudios.github.io/)'s Discord Server goes public, there'll be a dedicated spot to chat about my projects, WriterSharp included. Nothing fancy, just a chill place to hang out and share ideas.
 
 ## WriterClassic
-Meet **[WriterClassic](https://github.com/matty-the-dev/WriterClassic)**: WriterSharp's predecessor. It wasn't built with C#, but rather with good ol' [Python](https://python.org/) and `tkinter`.
+Meet **[WriterClassic](https://github.com/mf366-dev/WriterClassic)**: WriterSharp's predecessor. It wasn't built with C#, but rather with good ol' [Python](https://python.org/) and `tkinter`.
 
 WriterClassic had its fair share of quirks - some features were quite unique for a text editor. Its focus was mostly **text editing**, not code. And its plugin API? Let's just say it had its... rough edges.
 
