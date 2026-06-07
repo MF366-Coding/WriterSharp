@@ -63,7 +63,8 @@
 }
 
 /* Basic HTML built-ins */
-html, body {
+html,
+body {
 	height: 100%;
 	min-height: 100vh;
 	margin: 0;
@@ -97,7 +98,13 @@ header {
 	-ms-user-select: none;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
 	color: var(--text-dark);
 	flex-basis: 100%;
 }
@@ -135,7 +142,7 @@ blockquote {
 	font-style: italic;
 	padding: 1em 1.5em;
 	margin: 1.5em auto;
-	border-left: 4px solid var(--primary-color);
+	text-align: center;
 	background-color: var(--bg-light);
 	color: var(--text-dark);
 	max-width: 80%;
@@ -185,7 +192,8 @@ footer {
 	-ms-user-select: none;
 }
 
-pre, code {
+pre,
+code {
 	font: var(--monospace) 13px;
 	line-height: 1.2;
 }
@@ -359,7 +367,12 @@ img.hover-hue-img:hover {
 	-ms-user-select: none;
 }
 
-.card h1, .card h2, .card h3, .card h4, .card h5, .card h6 {
+.card h1,
+.card h2,
+.card h3,
+.card h4,
+.card h5,
+.card h6 {
 	margin-top: 0;
 }
 
@@ -371,7 +384,8 @@ img.hover-hue-img:hover {
 	border-radius: 8px;
 }
 
-#footer-copyright, .small-text {
+#footer-copyright,
+.small-text {
 	color: var(--text-medium);
 	font-size: 0.875rem;
 }
@@ -380,7 +394,8 @@ img.hover-hue-img:hover {
 	background-color: var(--bg-gray);
 }
 
-p.devlog-tag, .hero p a {
+p.devlog-tag,
+.hero p a {
 	background-color: var(--bg-white);
 	color: var(--primary-color);
 	font-weight: 500;
@@ -422,7 +437,8 @@ p.devlog-tag, .hero p a {
 	background-color: var(--bg-gray);
 }
 
-.under-construction a, a.disabled-link {
+.under-construction a,
+a.disabled-link {
 	pointer-events: none;
 	cursor: default;
 	color: var(--text-dark);
@@ -430,14 +446,16 @@ p.devlog-tag, .hero p a {
 	text-decoration: none;
 }
 
-.under-construction a:hover, a:hover.disabled-link {
+.under-construction a:hover,
+a:hover.disabled-link {
 	pointer-events: none;
 	cursor: default;
 	color: var(--text-dark);
 	text-decoration: none;
 }
 
-.under-construction a:visited, a:visited.disabled-link {
+.under-construction a:visited,
+a:visited.disabled-link {
 	pointer-events: none;
 	cursor: default;
 	color: var(--text-dark);
