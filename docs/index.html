@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="en">
     <head>
@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>WriterSharp</title>
         <link rel="stylesheet" href="css/styles.css" />
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     </head>
     <body>
         <header>
@@ -17,7 +17,9 @@
                 <a href="#"><i class="nf nf-md-puzzle"></i></a>
                 <a href="devlogs/index.html"><i class="nf nf-fa-book"></i></a>
                 <a href="about.html"><i class="nf nf-md-information"></i></a>
-                <button id="mode-toggle"><i class="nf nf-md-theme_light_dark"></i></button>
+                <button id="mode-toggle">
+                    <i class="nf nf-md-theme_light_dark"></i>
+                </button>
             </nav>
         </header>
 
@@ -26,91 +28,244 @@
                 <h1 class="huge-title">WriterSharp</h1>
                 <p><i class="nf nf-fa-clock"></i> Time until v0.0.1-alpha:</p>
                 <div id="timer">Loading...</div>
-                <p>WriterSharp is a code editor designed to be lightweight, fast, and intuitive, giving you the power to focus entirely on your coding without distractions.</p>
-                <p>With a modern interface and thoughtful features, every keystroke counts.</p>
+                <p>
+                    WriterSharp is a code editor designed to be lightweight,
+                    fast, and intuitive, giving you the power to focus entirely
+                    on your coding without distractions.
+                </p>
+                <p>
+                    With a modern interface and thoughtful features, every
+                    keystroke counts.
+                </p>
             </section>
 
             <section>
                 <h2 class="section-heading">Why use WriterSharp?</h2>
                 <div class="grid">
                     <div class="card">
-                        <h2><i class="nf nf-md-open_source_initiative"></i> Open-Source</h2>
-                        <p>One huge problem code editors sometimes carry is that they're not open-source and, even if they are, they're usually backed by a big corporate, causing you to be at the mercy of said corporate's decision. Unlike most code editors out there, WriterSharp is fully open-source and licensed under the permissive MIT License. Everyone can inspect the code, contribute improvements, or adapt it for their own workflows. Transparency and community-driven development are at the heart of WriterSharp.</p>
+                        <h2>
+                            <i class="nf nf-md-open_source_initiative"></i>
+                            Open-Source
+                        </h2>
+                        <p>
+                            One huge problem code editors sometimes carry is
+                            that they're not open-source and, even if they are,
+                            they're usually backed by a big corporate, causing
+                            you to be at the mercy of said corporate's decision.
+                            Unlike most code editors out there, WriterSharp is
+                            fully open-source and licensed under the permissive
+                            MIT License. Everyone can inspect the code,
+                            contribute improvements, or adapt it for their own
+                            workflows. Transparency and community-driven
+                            development are at the heart of WriterSharp.
+                        </p>
                     </div>
                     <div class="card">
-                        <h2><i class="nf nf-fa-eye_slash"></i> Privacy-focused</h2>
-                        <p>WriterSharp is fully telemetry-free*, meaning your data never leaves your device. Write, debug, and explore features without worrying about hidden tracking or corporate surveillance. Your privacy is always protected.</p>
-                        <p class="small-text">*Some third-party plugins may collect data. WriterSharp cannot control this, so please exercise caution when installing extensions.</p>
+                        <h2>
+                            <i class="nf nf-fa-eye_slash"></i> Privacy-focused
+                        </h2>
+                        <p>
+                            WriterSharp is fully telemetry-free*, meaning your
+                            data never leaves your device. Write, debug, and
+                            explore features without worrying about hidden
+                            tracking or corporate surveillance. Your privacy is
+                            always protected.
+                        </p>
+                        <p class="small-text">
+                            *Some third-party plugins may collect data.
+                            WriterSharp cannot control this, so please exercise
+                            caution when installing extensions.
+                        </p>
                     </div>
                     <div class="card">
                         <h2><i class="nf nf-fa-desktop"></i> Cross-platform</h2>
-                        <p>WriterSharp runs smoothly on Windows, Linux, and MacOS, providing a consistent experience regardless of your system. Whether you're at home, on a laptop, or a development workstation, WriterSharp adapts seamlessly.</p>
-                        <p class="small-text">*WriterSharp on MacOS is currently untested.</p>
+                        <p>
+                            WriterSharp runs smoothly on Windows, Linux, and
+                            MacOS, providing a consistent experience regardless
+                            of your system. Whether you're at home, on a laptop,
+                            or a development workstation, WriterSharp adapts
+                            seamlessly.
+                        </p>
+                        <p class="small-text">
+                            *WriterSharp on MacOS is currently untested.
+                        </p>
                     </div>
                     <div class="card">
                         <h2><i class="nf nf-md-puzzle"></i> Extensible</h2>
-                        <p>WriterSharp's plugin API allows you to extend and customize your environment. Add new features, tweak the interface, or integrate external tools. The API is designed to be future-proof, with flexibility and performance in mind, empowering power users to create a truly personalized experience.</p>
+                        <p>
+                            WriterSharp's plugin API allows you to extend and
+                            customize your environment. Add new features, tweak
+                            the interface, or integrate external tools. The API
+                            is designed to be future-proof, with flexibility and
+                            performance in mind, empowering power users to
+                            create a truly personalized experience.
+                        </p>
                     </div>
                     <div class="card">
-                        <h2><i class="nf nf-fa-magnifying_glass"></i> AnaSense Integration</h2>
-                        <p>WriterSharp has a native integration with AnaSense, an upcoming technology made by me to analyze buffers in real-time. This enables smarter data processing and deeper insight into your projects.</p>
-                        <p>AnaSense is, like WriterSharp, fully open-source and privacy-focused, ensuring high performance without compromising user trust or security.</p>
+                        <h2>
+                            <i class="nf nf-fa-magnifying_glass"></i> AnaSense
+                            Integration
+                        </h2>
+                        <p>
+                            WriterSharp has a native integration with AnaSense,
+                            an upcoming technology made by me to analyze buffers
+                            in real-time. This enables smarter data processing
+                            and deeper insight into your projects.
+                        </p>
+                        <p>
+                            AnaSense is, like WriterSharp, fully open-source and
+                            privacy-focused, ensuring high performance without
+                            compromising user trust or security.
+                        </p>
                     </div>
                     <div class="card">
                         <h2><i class="nf nf-cod-debug"></i> Debugger</h2>
-                        <p>WriterSharp includes a simple yet robust debugging experience. You can set static line breakpoints, dynamic triggers for exceptions, inspect variables, evaluate expressions, and monitor runtime behavior. It's designed to make debugging code efficient, even for complex projects.</p>
+                        <p>
+                            WriterSharp includes a simple yet robust debugging
+                            experience. You can set static line breakpoints,
+                            dynamic triggers for exceptions, inspect variables,
+                            evaluate expressions, and monitor runtime behavior.
+                            It's designed to make debugging code efficient, even
+                            for complex projects.
+                        </p>
                     </div>
                 </div>
 
-                <h2 class="section-heading">The Development Journey of WriterSharp</h2>
+                <h2 class="section-heading">
+                    The Development Journey of WriterSharp
+                </h2>
                 <div class="grid">
                     <div class="card">
                         <h2><i class="nf nf-fa-book"></i> Devlogs</h2>
-                        <p>Follow the development journey with devlogs that provide detailed insights into updates, challenges, and new features. Learn the thought process behind every change and see WriterSharp evolve over time.</p>
-                        <a href="devlogs/index.html">Learn More <i class="nf nf-fa-arrow_right"></i></a>
+                        <p>
+                            Follow the development journey with devlogs that
+                            provide detailed insights into updates, challenges,
+                            and new features. Learn the thought process behind
+                            every change and see WriterSharp evolve over time.
+                        </p>
+                        <a href="devlogs/index.html"
+                            >Learn More <i class="nf nf-fa-arrow_right"></i
+                        ></a>
                     </div>
                     <div class="card">
-                        <h2><i class="nf nf-fa-github"></i> GitHub Repository</h2>
-                        <p>Check out the latest commits to the <code>v0.0.1-alpha-dev</code> branch and explore how WriterSharp is built. Contribute, report issues, or simply observe the progress as features take shape.</p>
-                        <a href="https://github.com/mf366-dev/WriterSharp/tree/v0.0.1-alpha-dev/">Learn More <i class="nf nf-fa-arrow_right"></i></a>
+                        <h2>
+                            <i class="nf nf-fa-github"></i> GitHub Repository
+                        </h2>
+                        <p>
+                            Check out the latest commits to the
+                            <code>v0.0.1-alpha-dev</code> branch and explore how
+                            WriterSharp is built. Contribute, report issues, or
+                            simply observe the progress as features take shape.
+                        </p>
+                        <a
+                            href="https://github.com/mf366-dev/WriterSharp/tree/v0.0.1-alpha-dev/"
+                            >Learn More <i class="nf nf-fa-arrow_right"></i
+                        ></a>
                     </div>
                     <div class="card under-construction">
-                        <div class="banner"><i class="nf nf-oct-no_entry"></i> Coming Soon</div>
+                        <div class="banner">
+                            <i class="nf nf-oct-no_entry"></i> Coming Soon
+                        </div>
                         <h2><i class="nf nf-fa-discord"></i> Discord Server</h2>
-                        <p>While there isn't an official Discord server strictly for WriterSharp yet, you can join OceanApocalypseStudios's community server. Discuss WriterSharp, share ideas, troubleshoot issues, and meet other enthusiasts passionate about development tools.</p>
-                        <a href="#">Learn More <i class="nf nf-fa-arrow_right"></i></a>
+                        <p>
+                            While there isn't an official Discord server
+                            strictly for WriterSharp yet, you can join
+                            OceanApocalypseStudios's community server. Discuss
+                            WriterSharp, share ideas, troubleshoot issues, and
+                            meet other enthusiasts passionate about development
+                            tools.
+                        </p>
+                        <a href="#"
+                            >Learn More <i class="nf nf-fa-arrow_right"></i
+                        ></a>
                     </div>
                     <div class="card">
-                        <h2><i class="nf nf-fa-youtube"></i> YouTube Channel and Twitch</h2>
-                        <p>Occasionally, WriterSharp updates or development demos may appear on my YouTube channel. Expect tutorials, sneak peeks, and overviews of major features as the project matures. I also sometimes stream development content to my Twitch channel.</p>
-                        <a href="https://www.youtube.com/@mf_366/">YouTube <i class="nf nf-fa-youtube"></i></a><br/>
-                        <a href="https://www.twitch.tv/real_mf366/">Twitch <i class="nf nf-fa-twitch"></i></a>
+                        <h2>
+                            <i class="nf nf-fa-youtube"></i> YouTube Channel and
+                            Twitch
+                        </h2>
+                        <p>
+                            Occasionally, WriterSharp updates or development
+                            demos may appear on my YouTube channel. Expect
+                            tutorials, sneak peeks, and overviews of major
+                            features as the project matures. I also sometimes
+                            stream development content to my Twitch channel.
+                        </p>
+                        <a href="https://www.youtube.com/@mf_366/"
+                            >YouTube <i class="nf nf-fa-youtube"></i></a
+                        ><br />
+                        <a href="https://www.twitch.tv/real_mf366/"
+                            >Twitch <i class="nf nf-fa-twitch"></i
+                        ></a>
                     </div>
                 </div>
 
                 <h2 class="section-heading">Recent Announcements</h2>
                 <div class="grid">
                     <div class="card">
-                        <h2><i class="nf nf-cod-copilot"></i> AI Integration in WriterSharp... or not?</h2>
-                        <p class="devlog-tag"><i class="nf nf-fa-tag"></i> Future</p>
-                        <p>Two devlogs in one week?! That's pretty exceptional, huh? Well, it's been a different week - not bad, but one where I've been busy with other projects of mine. WriterSharp's been quiet, but I'm still finding time to update it whenever possible...</p>
-                        <a href="devlogs/devlog2.html">Learn More <i class="nf nf-fa-arrow_right"></i></a>
+                        <h2>
+                            <i class="nf nf-md-language_csharp"></i> No more
+                            Avalonia!
+                        </h2>
+                        <p>Released on 20/06/2026</p>
+                        <p class="devlog-tag">
+                            <i class="nf nf-fa-tag"></i> Future
+                        </p>
+                        <p class="devlog-tag">
+                            <i class="nf nf-fa-tag"></i> Important
+                        </p>
+                        <p>
+                            Well, it's been a while. This devlog will be shorter
+                            as I just want to announce that WriterSharp will no
+                            longer be using Avalonia. By the end of this month,
+                            Avalonia will retire its...
+                        </p>
+                        <a href="devlog3.html"
+                            >Learn More <i class="nf nf-fa-arrow_right"></i
+                        ></a>
                     </div>
                     <div class="card">
-                        <h2><i class="nf nf-fa-heart heart-icon"></i> My page on Buy Me A Coffee</h2>
-                        <p>You can support WriterSharp's development through Buy Me A Coffee. Your contributions help fund updates, feature development, and stability improvements, allowing me to focus on delivering the best possible experience. Supporters also gain early access to devlogs, tech demos, and exclusive previews of upcoming features. Every contribution, big or small, directly impacts WriterSharp's progress.</p>
-                        <a href="https://buymeacoffee.com/mf366">Learn More <i class="nf nf-fa-arrow_right"></i></a>
+                        <h2>
+                            <i class="nf nf-fa-heart heart-icon"></i> My page on
+                            Buy Me A Coffee
+                        </h2>
+                        <p>
+                            You can support WriterSharp's development through
+                            Buy Me A Coffee. Your contributions help fund
+                            updates, feature development, and stability
+                            improvements, allowing me to focus on delivering the
+                            best possible experience. Supporters also gain early
+                            access to devlogs, tech demos, and exclusive
+                            previews of upcoming features. Every contribution,
+                            big or small, directly impacts WriterSharp's
+                            progress.
+                        </p>
+                        <a href="https://buymeacoffee.com/mf366"
+                            >Learn More <i class="nf nf-fa-arrow_right"></i
+                        ></a>
                     </div>
                     <div class="card">
-                        <h2><i class="nf nf-md-web"></i> WriterSharp's new website</h2>
-                        <p class="devlog-tag"><i class="nf nf-fa-tag"></i> Announcement</p>
-                        <p>Welcome to the very first WriterSharp devlog - now hosted in WriterSharp's brand new site. Yep, that's right, everyone! I've officially moved from the tiny little section on my main site...</p>
-                        <a href="devlogs/devlog1.html">Learn More <i class="nf nf-fa-arrow_right"></i></a>
+                        <h2>
+                            <i class="nf nf-md-web"></i> WriterSharp's new
+                            website
+                        </h2>
+                        <p class="devlog-tag">
+                            <i class="nf nf-fa-tag"></i> Announcement
+                        </p>
+                        <p>
+                            Welcome to the very first WriterSharp devlog - now
+                            hosted in WriterSharp's brand new site. Yep, that's
+                            right, everyone! I've officially moved from the tiny
+                            little section on my main site...
+                        </p>
+                        <a href="devlogs/devlog1.html"
+                            >Learn More <i class="nf nf-fa-arrow_right"></i
+                        ></a>
                     </div>
                 </div>
             </section>
         </main>
-        
+
         <footer>
             <p id="footer-copyright">
                 Copyright <i class="nf nf-fa-copyright"></i> 2025 Matthew

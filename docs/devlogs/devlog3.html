@@ -1,0 +1,122 @@
+<!doctype html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WriterSharp - Devlogs</title>
+        <link rel="stylesheet" href="../css/styles.css" />
+        <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    </head>
+    <body>
+        <header>
+            <div class="title">WriterSharp - Devlogs</div>
+            <nav>
+                <a href="../index.html"><i class="nf nf-fa-home"></i></a>
+                <a href="#"><i class="nf nf-fa-download"></i></a>
+                <a href="#"><i class="nf nf-md-puzzle"></i></a>
+                <a href="index.html"><i class="nf nf-fa-book"></i></a>
+                <a href="../about.html"><i class="nf nf-md-information"></i></a>
+                <button id="mode-toggle">
+                    <i class="nf nf-md-theme_light_dark"></i>
+                </button>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero alt-bg4">
+                <h1 class="huge-title">Devlog 3</h1>
+                <p><i class="nf nf-fa-book"></i> No more Avalonia!</p>
+                <p><i class="nf nf-fa-clock"></i> 20/06/2026</p>
+                <p class="devlog-tag"><i class="nf nf-fa-tag"></i> Future</p>
+                <p class="devlog-tag"><i class="nf nf-fa-tag"></i> Important</p>
+                <p>
+                    <a href="devlog2.html"
+                        ><i class="nf nf-fa-arrow_left"></i> Previous Devlog</a
+                    >
+                    <a href="index.html"
+                        ><i class="nf nf-fa-home"></i> Go Back</a
+                    >
+                    <!-- no next button -->
+                </p>
+            </section>
+
+            <section>
+                <div class="text-container">
+                    <p>Well, it's been a while.</p>
+                    <p>
+                        This devlog will be shorter as I just want to announce
+                        that WriterSharp will no longer be using Avalonia.
+                    </p>
+                    <hr />
+                    <h2>Context</h2>
+                    <p>
+                        By the end of this month, Avalonia will retire its
+                        Avalonia Accelerate Community license, which was a way
+                        for them to offer OSS first individuals and small
+                        organizations free access to some of their preemium
+                        tools, such as Parcel, their app packaging solution,
+                        amongst others.
+                    </p>
+                    <p>
+                        Well, it's sad to see that they now consider their
+                        Visual Studio plugin a <em>"preemium"</em> tool, only
+                        offering it for free for OSS individuals. The problem is
+                        that I also happen to be the co-founder of an OSS first
+                        organization, a very small one, called
+                        <a href="https://github.com/OceanApocalypseStudios/"
+                            >OceanApocalypseStudios</a
+                        >
+                        and I lost my Community license for said organization,
+                        due to their licensing changes.
+                    </p>
+                    <h2>Licensing for Individuals</h2>
+                    <p>
+                        I could, in theory, make no changes to WriterSharp —
+                        Avalonia still allows individuals to have a Community
+                        license if elligible, but I'm <strong>not</strong> going
+                        to support such a greedy licensing change.
+                    </p>
+                    <p>
+                        I obviously understand developing and maintaining
+                        open-source software is hard: I'm an open-source
+                        developer too. But if they think the solution to the
+                        problem is making a small OSS organization that
+                        currently makes no profit and only has 2 people working
+                        on it pay 24€ monthly (cheapest non-free plan, by the
+                        way) for an Avalonia license, then they're awfully
+                        wrong.
+                    </p>
+                    <h2>Uno Platform</h2>
+                    <p>
+                        Taking advantage of the fact WriterSharp is still very
+                        early in development, I'll be officially moving to Uno
+                        Platform: an open-source cross-platform UI framework
+                        that is fully free (except for their Studio app, but
+                        even that is only paid if you want the AI features,
+                        which I gladly pass on).
+                    </p>
+                    <p>
+                        Uno has also been around for quite some time, and seems
+                        like the logical alternative to Avalonia.
+                    </p>
+                    <hr />
+                    <p>
+                        Like I said, this was a short devlog. I just needed to
+                        tell y'all what was going on with this change, which
+                        will take place somewhere in the near future.
+                    </p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p id="footer-copyright">
+                Copyright <i class="nf nf-fa-copyright"></i> 2025 Matthew
+            </p>
+        </footer>
+
+        <script src="../js/dark-mode.js"></script>
+        <script src="../js/scroll-animation.js"></script>
+    </body>
+</html>

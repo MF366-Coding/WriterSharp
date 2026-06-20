@@ -6,7 +6,7 @@ AI is 90% marketing and 10% reality.
 Linus Torvalds (Adapted)
 Future
 Community
-1 <- this means the next button should not exist also only the first character from this line is read soo; a value of 0 means both next and previous should exist
+0 <- this means that both buttons should exist
 
 Two devlogs in one week?! That's pretty exceptional, huh?
 
